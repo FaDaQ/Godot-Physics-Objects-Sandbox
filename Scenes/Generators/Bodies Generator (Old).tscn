@@ -1,0 +1,133 @@
+[gd_scene load_steps=5 format=3 uid="uid://c04b3otsg4jhj"]
+
+[ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs" id="1_gcv1q"]
+[ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/SelectBodyGenerator.cs" id="2_xi1yq"]
+[ext_resource type="Script" path="res://Scripts/Main/ParametrsChange_ConnectingSignals.cs" id="3_h5owl"]
+[ext_resource type="Script" path="res://Scripts/Generators/ApplyGeneratorButton.cs" id="4_cr3ol"]
+
+[node name="BodiesGenerator" type="Node2D"]
+top_level = true
+script = ExtResource("1_gcv1q")
+
+[node name="Generator Settings Panel" type="PanelContainer" parent="."]
+self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
+offset_left = 1.0
+offset_right = 197.0
+offset_bottom = 217.0
+
+[node name="Columns" type="HBoxContainer" parent="Generator Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Parametrs Names" type="VBoxContainer" parent="Generator Settings Panel/Columns"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Mass"
+
+[node name="Bounce" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 15
+text = "Bounce"
+
+[node name="Friction" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Friction"
+
+[node name="Inertia (work with BUG)" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Inertia"
+
+[node name="Scale" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Scale"
+
+[node name="Label2" type="Label" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Time Delay"
+
+[node name="Select Rigid Body" type="OptionButton" parent="Generator Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+item_count = 4
+selected = 0
+popup/item_0/text = "Circle"
+popup/item_0/id = 0
+popup/item_1/text = "Rectangle"
+popup/item_1/id = 1
+popup/item_2/text = "Hexagon"
+popup/item_2/id = 2
+popup/item_3/text = "Triangle"
+popup/item_3/id = 3
+script = ExtResource("2_xi1yq")
+
+[node name="Parametrs Change" type="VBoxContainer" parent="Generator Settings Panel/Columns"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("3_h5owl")
+
+[node name="Mass Edit" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "1"
+placeholder_text = "kg"
+alignment = 1
+
+[node name="Bounce Edit" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0.5"
+alignment = 1
+
+[node name="Friction Edit" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+alignment = 1
+
+[node name="Inertia Edit (work with BUG)" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+placeholder_text = "kg • px^2"
+alignment = 1
+
+[node name="Scale Edit" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+placeholder_text = "Scaling"
+alignment = 1
+
+[node name="Time Delay Edit" type="LineEdit" parent="Generator Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0.1"
+alignment = 1
+
+[node name="Apply" type="Button" parent="Generator Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 15
+text = "Apply"
+script = ExtResource("4_cr3ol")
+
+[node name="Delay Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Generator Settings Panel/Apply" to="." method="SetupOver"]
+[connection signal="timeout" from="Delay Timer" to="." method="Generate"]

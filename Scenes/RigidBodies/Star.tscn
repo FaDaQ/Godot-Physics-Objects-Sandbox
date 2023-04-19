@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy8p2rf6g3ilb"]
+
+[ext_resource type="Texture2D" uid="uid://d3tdnevt6v6up" path="res://Sprites/Star Deffault.svg" id="1_th74e"]
+
+[node name="Star" type="RigidBody2D"]
+
+[node name="StarDeffault" type="Sprite2D" parent="."]
+texture = ExtResource("1_th74e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, -53, 17, -21, 52, -15, 54, -11, 53, -8, 28, 15, 34, 48, 33, 52, 28, 51, 0, 36, -32, 52, -35, 52, -36, 49, -30, 15, -55, -11, -56, -13, -56, -15, -55, -16, -20, -22, -2, -53)

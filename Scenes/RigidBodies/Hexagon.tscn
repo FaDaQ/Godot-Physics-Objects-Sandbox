@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bae0o08lb8ji1"]
+
+[ext_resource type="Texture2D" uid="uid://r3jky4ihikkh" path="res://Sprites/Hexagon Deffault.svg" id="1_1skij"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uwg5a"]
+
+[node name="Hexagon" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_uwg5a")
+
+[node name="HexagonDeffault" type="Sprite2D" parent="."]
+texture = ExtResource("1_1skij")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-26, -43, -51, 0, -26, 43, 25, 43, 50, 0, 25, -43)

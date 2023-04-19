@@ -1,0 +1,314 @@
+[gd_scene load_steps=17 format=3 uid="uid://ct33b86y5dfa2"]
+
+[ext_resource type="Script" path="res://Scripts/Main/Root.cs" id="1_50ubk"]
+[ext_resource type="Script" path="res://Scripts/Main/Drawer.cs" id="2_vydgd"]
+[ext_resource type="Script" path="res://TestClick.cs" id="3_hkr0f"]
+[ext_resource type="Script" path="res://Scripts/Main/FPSLabel.cs" id="3_vjahl"]
+[ext_resource type="Script" path="res://Scripts/Main/ObjectsCounter.cs" id="4_hibym"]
+[ext_resource type="Script" path="res://Scripts/Main/ObjectsSpawn.cs" id="5_n56qq"]
+[ext_resource type="Script" path="res://Scripts/Main/CollisionArea.cs" id="6_jnarl"]
+[ext_resource type="Script" path="res://Scripts/Main/Settings.cs" id="7_14ds1"]
+[ext_resource type="Script" path="res://Scripts/Main/SelectRigidBody.cs" id="8_ljrv1"]
+[ext_resource type="Script" path="res://Scripts/Main/BodySettingsWindow.cs" id="10_a8kfg"]
+[ext_resource type="Script" path="res://Scripts/Main/ParametrsChange_ConnectingSignals.cs" id="11_xm3ky"]
+[ext_resource type="Script" path="res://Scripts/Main/Borders Scripts/BorderSettingsVBox_ConnectingSignals.cs" id="12_15qde"]
+[ext_resource type="Script" path="res://Scripts/Main/PausedLabel.cs" id="13_tp23d"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yecvf"]
+a = Vector2(1280, 720)
+b = Vector2(0, 720)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_eqkoi"]
+b = Vector2(0, 720)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_va8wq"]
+a = Vector2(1280, 0)
+b = Vector2(1280, 720)
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_50ubk")
+
+[node name="Panel Container" type="PanelContainer" parent="."]
+self_modulate = Color(0, 0.419608, 0.4, 1)
+offset_right = 1280.0
+offset_bottom = 718.0
+
+[node name="Drawer" type="Node2D" parent="Panel Container"]
+process_mode = 3
+script = ExtResource("2_vydgd")
+
+[node name="FPS Counter" type="Label" parent="Panel Container/Drawer"]
+top_level = true
+offset_left = 5.0
+offset_top = 37.0
+offset_right = 126.0
+offset_bottom = 64.0
+text = "FPS: "
+script = ExtResource("3_vjahl")
+
+[node name="Objects Counter" type="Label" parent="Panel Container/Drawer"]
+top_level = true
+offset_left = 3.0
+offset_top = 58.0
+offset_right = 129.0
+offset_bottom = 84.0
+text = "Objects: "
+script = ExtResource("4_hibym")
+
+[node name="Objects" type="Node2D" parent="Panel Container/Drawer"]
+script = ExtResource("5_n56qq")
+
+[node name="Collision Area" type="StaticBody2D" parent="Panel Container/Drawer"]
+script = ExtResource("6_jnarl")
+
+[node name="Floor" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
+shape = SubResource("SegmentShape2D_yecvf")
+one_way_collision_margin = 0.0
+
+[node name="Left" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
+shape = SubResource("SegmentShape2D_eqkoi")
+
+[node name="Right" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
+shape = SubResource("SegmentShape2D_va8wq")
+
+[node name="Settings" type="Node2D" parent="."]
+script = ExtResource("7_14ds1")
+
+[node name="UI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1282.0
+offset_bottom = 40.0
+
+[node name="Top MenuBar" type="MenuBar" parent="UI"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 40.0
+
+[node name="Top Menu HBox" type="HBoxContainer" parent="UI/Top MenuBar"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 40.0
+
+[node name="Select Rigid Body" type="OptionButton" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+item_count = 7
+selected = 0
+popup/item_0/text = "Circle"
+popup/item_0/id = 0
+popup/item_1/text = "Rectangle"
+popup/item_1/id = 1
+popup/item_2/text = "Hexagon"
+popup/item_2/id = 2
+popup/item_3/text = "Triangle"
+popup/item_3/id = 3
+popup/item_4/text = "Star"
+popup/item_4/id = 5
+popup/item_5/text = ""
+popup/item_5/id = 5
+popup/item_5/separator = true
+popup/item_6/text = "Bodies Generator"
+popup/item_6/id = 6
+script = ExtResource("8_ljrv1")
+
+[node name="Gravity" type="LineEdit" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+placeholder_text = "Gravity"
+alignment = 1
+
+[node name="Body Settings" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Body Settings"
+
+[node name="Clear Bodies" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Clear Bodies"
+
+[node name="Clear Generators" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Clear Generators"
+
+[node name="Clear Lines" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Clear Lines"
+
+[node name="Controls Guide" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Borders Setting" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+visible = false
+layout_mode = 2
+text = "Borders"
+
+[node name="Down MenuBar" type="MenuBar" parent="UI"]
+layout_mode = 0
+offset_top = 682.0
+offset_right = 1280.0
+offset_bottom = 722.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Down MenuBar"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 36.0
+
+[node name="Button" type="Button" parent="UI/Down MenuBar/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Test Click"
+script = ExtResource("3_hkr0f")
+
+[node name="Body Settings Panel" type="PanelContainer" parent="UI"]
+visible = false
+self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
+layout_mode = 0
+offset_left = 513.0
+offset_top = 161.0
+offset_right = 734.0
+offset_bottom = 504.0
+script = ExtResource("10_a8kfg")
+
+[node name="Columns" type="HBoxContainer" parent="UI/Body Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Parametrs Names" type="VBoxContainer" parent="UI/Body Settings Panel/Columns"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Mass"
+
+[node name="Bounce" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Bounce"
+
+[node name="Friction" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Friction"
+
+[node name="Inertia (work with BUG)" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Inertia"
+
+[node name="Scale" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Scale"
+
+[node name="Parametrs Change" type="VBoxContainer" parent="UI/Body Settings Panel/Columns"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("11_xm3ky")
+
+[node name="Mass Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "1"
+placeholder_text = "kg"
+alignment = 1
+
+[node name="Bounce Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+text = "0.5"
+alignment = 1
+
+[node name="Friction Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+text = "1"
+alignment = 1
+
+[node name="Inertia Edit (work with BUG)" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+placeholder_text = "kg • px^2"
+alignment = 1
+
+[node name="Scale Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+layout_mode = 2
+text = "1"
+placeholder_text = "Scaling"
+alignment = 1
+
+[node name="Border Settings Panel" type="PanelContainer" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 310.0
+offset_top = 43.0
+offset_right = 413.0
+offset_bottom = 181.0
+
+[node name="Border Settings VBox" type="VBoxContainer" parent="UI/Border Settings Panel"]
+layout_mode = 2
+script = ExtResource("12_15qde")
+
+[node name="Floor" type="CheckButton" parent="UI/Border Settings Panel/Border Settings VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+button_pressed = true
+text = "Floor"
+
+[node name="Celling" type="CheckButton" parent="UI/Border Settings Panel/Border Settings VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Celling"
+
+[node name="Left" type="CheckButton" parent="UI/Border Settings Panel/Border Settings VBox"]
+layout_mode = 2
+text = "Left"
+
+[node name="Right" type="CheckButton" parent="UI/Border Settings Panel/Border Settings VBox"]
+layout_mode = 2
+text = "Right"
+
+[node name="Other Options" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 1137.0
+offset_right = 1271.0
+offset_bottom = 720.0
+
+[node name="Paused" type="Label" parent="UI/Other Options"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Paused"
+horizontal_alignment = 2
+script = ExtResource("13_tp23d")
+
+[connection signal="item_selected" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" method="SetCurrentBodyID"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="text_changed" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="GravityChanged"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="UI/Body Settings Panel" method="ShowWindow"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Panel Container/Drawer/Objects" method="ClearBodies"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Panel Container/Drawer/Objects" method="ClearGenerators"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Panel Container/Drawer/Collision Area" method="ClearCollisionLines"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/Body Settings Panel" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Body Settings Panel" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/Border Settings Panel" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Border Settings Panel" to="Settings" method="userEndInteractWithGUI"]
