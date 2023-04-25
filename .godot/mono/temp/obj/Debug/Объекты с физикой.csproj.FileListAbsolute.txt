@@ -1,0 +1,17 @@
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\Объекты с физикой.deps.json
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\Объекты с физикой.runtimeconfig.json
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\Объекты с физикой.dll
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\Объекты с физикой.pdb
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\GodotSharp.dll
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.csproj.AssemblyReference.cache
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.GeneratedMSBuildEditorConfig.editorconfig
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.AssemblyInfoInputs.cache
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.AssemblyInfo.cs
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.csproj.CoreCompileInputs.cache
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.csproj.CopyComplete
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.dll
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\refint\Объекты с физикой.dll
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.pdb
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\Объекты с физикой.genruntimeconfig.cache
+E:\Godot Projects\Godot-Physics-Objects-Sandbox-master\.godot\mono\temp\obj\Debug\ref\Объекты с физикой.dll

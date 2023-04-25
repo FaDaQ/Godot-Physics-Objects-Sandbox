@@ -1,0 +1,57 @@
+2a60927148abd1d33b818b535e306557
+::res://::1682419103
+changelog v3.3.txt::TextFile::-1::1682187100::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1681900876::0::1::::<><>::
+icon.png::CompressedTexture2D::2933407715386742806::1681900876::1682180685::1::::<><>::
+icon.svg::CompressedTexture2D::9097785363259314883::1681900876::1682180685::1::::<><>::
+TestClick.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+::res://Scenes/::1682195250
+Root.tscn::PackedScene::7946325580289520243::1682195250::0::1::::<><>::res://Scripts/Main/Root.cs<>res://Scripts/Main/Drawer.cs<>res://TestClick.cs<>res://Scripts/Main/FPSLabel.cs<>res://Scripts/Main/ObjectsCounter.cs<>res://Scripts/Main/ObjectsSpawn.cs<>res://Scripts/Main/CollisionArea.cs<>res://Scripts/Main/Settings.cs<>res://Scripts/Main/SelectRigidBody.cs<>res://Scripts/Main/BodySettingsWindow.cs<>res://Scripts/Main/ParametrsChange_ConnectingSignals.cs<>res://Scripts/Main/Borders Scripts/BorderSettingsVBox_ConnectingSignals.cs<>res://Scripts/Main/PausedLabel.cs<>res://Scripts/Main/ControlsPanel.cs
+::res://Scenes/Generators/::1682186956
+Bodies Generator (Old).tscn::PackedScene::6587540897932040803::1681900876::0::1::::<><>::res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs<>res://Scripts/Generators/Bodies Generator/SelectBodyGenerator.cs<>res://Scripts/Main/ParametrsChange_ConnectingSignals.cs<>res://Scripts/Generators/ApplyGeneratorButton.cs
+Body.tscn::PackedScene::7754659016693703914::1682183836::0::1::::<><>::uid://dtxty5j3g3yq0<>res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs<>res://Scripts/Generators/Bodies Generator/SelectGeneratorBody.cs
+Parent Generator.tscn::PackedScene::8541528841346656409::1682183889::0::1::::<><>::res://Scripts/Generators/Parent Generot/ParentGenerator.cs<>res://Scripts/Main/ParametrsChange_ConnectingSignals.cs<>res://Scripts/Generators/ApplyGeneratorButton.cs
+::res://Scenes/InteractionObjects/::1682195250
+Atomic Bomb.tscn::PackedScene::5303381443697273250::1682195250::0::1::::<><>::res://Scripts/Interaction Objects/AtomicBomb.cs<>uid://btas03cddkrq5
+::res://Scenes/RigidBodies/::1682195250
+Circle.tscn::PackedScene::2674975032874716810::1682183889::0::1::::<><>::uid://vlaf5ehgevx6
+Hexagon.tscn::PackedScene::2396222485207903366::1682195250::0::1::::<><>::uid://r3jky4ihikkh
+Rectangle.tscn::PackedScene::3014383836745791219::1681900876::0::1::::<><>::uid://sl7qcr2nwtgo
+Star.tscn::PackedScene::8912878637641582967::1681900876::0::1::::<><>::uid://d3tdnevt6v6up
+Triangle.tscn::PackedScene::7797495578772732572::1681900876::0::1::::<><>::uid://ddbq3wugk13f
+::res://Scripts/::1682189125
+::res://Scripts/Generators/::1682180661
+ApplyGeneratorButton.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+GeneratorSettings.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+::res://Scripts/Generators/Bodies Generator/::1682183756
+BodiesGenerator.cs::CSharpScript::-1::1682183756::0::1::::<><>::
+SelectBodyGenerator.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+SelectGeneratorBody.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+::res://Scripts/Generators/Parent Generot/::1682180662
+ParentGenerator.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+::res://Scripts/Interaction Objects/::1682195113
+AtomicBomb.cs::CSharpScript::-1::1682195113::0::1::::<><>::
+::res://Scripts/Main/::1682191811
+BodySettingsWindow.cs::CSharpScript::-1::1682181313::0::1::::<><>::
+CollisionArea.cs::CSharpScript::-1::1682183442::0::1::::<><>::
+ControlsPanel.cs::CSharpScript::-1::1682183162::0::1::::<><>::
+Drawer.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+FPSLabel.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+ObjectsCounter.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+ObjectsSpawn.cs::CSharpScript::-1::1682191811::0::1::::<><>::
+ParametrsChange_ConnectingSignals.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+PausedLabel.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+Root.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+SelectRigidBody.cs::CSharpScript::-1::1682188928::0::1::::<><>::
+Settings.cs::CSharpScript::-1::1682186901::0::1::::<><>::
+::res://Scripts/Main/Borders Scripts/::1682180662
+BorderSettingsVBox_ConnectingSignals.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+Floor.cs::CSharpScript::-1::1681900876::0::1::::<><>::
+::res://Sprites/::1682187549
+Atomic Bomb.svg::CompressedTexture2D::3721147737417276514::1682187538::1682187549::1::::<><>::
+Circle Deffault.svg::CompressedTexture2D::1496684382868832353::1681900876::1682180685::1::::<><>::
+Hexagon Deffault.svg::CompressedTexture2D::1251578535567066995::1681900876::1682180685::1::::<><>::
+Rectangle Deffault.png::CompressedTexture2D::3036925207423547125::1681900876::1682180685::1::::<><>::
+Rectangle Deffault.svg::CompressedTexture2D::1288078989803636678::1681900876::1682180685::1::::<><>::
+Star Deffault.svg::CompressedTexture2D::9163978460010263403::1681900876::1682180685::1::::<><>::
+Triangle Deffault.svg::CompressedTexture2D::216850459428173013::1681900876::1682180685::1::::<><>::

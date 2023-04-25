@@ -1,0 +1,13 @@
+> Добавлен параметр Torque для тел, позволяющий задать константное значение для коэффициента вращения объектов
+> Добавлена кнопка закрытие в окно с настройками параметров тел
+> Добавлена функциональность кнопке "Controls", теперь, кликнув на неё, можно увидеть гайд управления игры
+> Исправлен баг с зависанием тел в воздухе, если они неподвижно лежали на линиях перед удалением
+> Переработан выбор объектов в выпадающем меню
+> Генераторы теперь поддаются паузе
+
+> Added the Torque parameter for bodies, which allows you to set a constant value for the rotation coefficient of objects
+> Added a close button to the window with the settings of the body parameters
+> Added the functionality of the "Controls" button, now by clicking on it, you can see the game control guide
+> Fixed a bug with bodies hanging in the air if they were lying motionless on the lines before removal
+> Reworked the selection of objects in the drop-down menu
+> Generators are now amenable to pause

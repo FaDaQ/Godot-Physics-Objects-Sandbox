@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://chs86gxfbh3ak"]
+
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/AtomicBomb.cs" id="1_4n7nx"]
+[ext_resource type="Texture2D" uid="uid://btas03cddkrq5" path="res://Sprites/Atomic Bomb.svg" id="1_w3v3o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck6jy"]
+radius = 30.0
+height = 106.0
+
+[node name="Atomic Bomb" type="RigidBody2D"]
+mass = 1000.0
+max_contacts_reported = 100
+contact_monitor = true
+script = ExtResource("1_4n7nx")
+
+[node name="AtomicBomb" type="Sprite2D" parent="."]
+texture = ExtResource("1_w3v3o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("CapsuleShape2D_ck6jy")

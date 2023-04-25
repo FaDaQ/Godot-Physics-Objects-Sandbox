@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bed1ph4ebyekw"]
+
+[ext_resource type="Texture2D" uid="uid://vlaf5ehgevx6" path="res://Sprites/Circle Deffault.svg" id="1_c8ddj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l4fwt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c83v5"]
+radius = 37.054
+
+[node name="Circle" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_l4fwt")
+
+[node name="CircleDeffault2" type="Sprite2D" parent="."]
+texture = ExtResource("1_c8ddj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c83v5")
