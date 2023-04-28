@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ddbq3wugk13f" path="res://Sprites/Triangle Deffault.svg" id="1_l2vn6"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
+max_contacts_reported = 99
+contact_monitor = true
 
 [node name="TriangleDeffault" type="Sprite2D" parent="."]
 texture = ExtResource("1_l2vn6")

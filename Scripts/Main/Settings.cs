@@ -24,9 +24,10 @@ public partial class Settings : Node
 	};
 
 	public static bool userIsInteractGUI = false;
+    public static List<Node2D> AnyEntity = new List<Node2D>(); // This List is required for you could cancel the last action
 
-	// Call in mouse_entered signal for fix bug with bodies spawn
-	public void userInteractWithGUI()
+    // Call in mouse_entered signal for fix bug with bodies spawn
+    public void userInteractWithGUI()
 	{
 		userIsInteractGUI = true;
 	}
@@ -38,7 +39,19 @@ public partial class Settings : Node
 	// Call in text_changed signal in Gravity LineEdit
 	public void GravityChanged(string new_text)
 	{
-		Gravity = Convert.ToInt32(new_text);
+		Gravity = Convert.ToSingle(new_text.Replace(".", ","));
 		ObjectsSpawn.RigidBodies.ForEach(body => body.GravityScale = Gravity);
 	}
+	public static void CancelAction()
+	{
+        AnyEntity[^1].Cancel();
+		object entity = AnyEntity[^1];
+
+		if (entity is RigidBody2D)
+			ObjectsSpawn.RigidBodies.Remove(entity as RigidBody2D);
+		else if (entity is ParentGenerator)
+			ObjectsSpawn.Generators.Remove(entity as ParentGenerator);
+
+        AnyEntity.RemoveAt(AnyEntity.Count - 1);
+    }
 }

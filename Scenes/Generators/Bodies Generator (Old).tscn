@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c04b3otsg4jhj"]
+[gd_scene load_steps=5 format=3 uid="uid://wtm24ll1j7ls"]
 
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs" id="1_gcv1q"]
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/SelectBodyGenerator.cs" id="2_xi1yq"]
-[ext_resource type="Script" path="res://Scripts/Main/ParametrsChange_ConnectingSignals.cs" id="3_h5owl"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/ParametrsChange_ConnectingSignals.cs" id="3_h5owl"]
 [ext_resource type="Script" path="res://Scripts/Generators/ApplyGeneratorButton.cs" id="4_cr3ol"]
 
 [node name="BodiesGenerator" type="Node2D"]

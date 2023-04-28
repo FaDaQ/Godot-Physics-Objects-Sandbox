@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Linq;
 
 public partial class Root : Node2D
 {
@@ -9,7 +10,7 @@ public partial class Root : Node2D
 	public override void _Ready()
 	{
 
-		foreach (CollisionShape2D i in GetNode<StaticBody2D>("Panel Container/Drawer/Collision Area/").GetChildren())
+		foreach (CollisionShape2D i in GetNode<StaticBody2D>("Panel Container/Drawer/Collision Area/").GetChildren().Take(3))
 			Borders.Add(i.Name, i);
 
 
@@ -41,8 +42,8 @@ public partial class Root : Node2D
 
 	private void ResizeableBorders(Vector2 windowSize)
 	{
-		Borders["Floor"].Shape = new SegmentShape2D() { A = new Vector2(0, windowSize.Y), B = new Vector2(windowSize.X, windowSize.Y) };
-		Borders["Left"].Shape = new SegmentShape2D() { A = new Vector2(0, 0), B = new Vector2(0, windowSize.Y) };
-		Borders["Right"].Shape = new SegmentShape2D() { A = new Vector2(windowSize.X, 0), B = new Vector2(windowSize.X, windowSize.Y) };
+		Borders["Floor"].Transform = new Transform2D(0, new Vector2(windowSize.X / 2, windowSize.Y));
+		Borders["Left"].Transform = new Transform2D(0, new Vector2(0, windowSize.Y / 2));
+		Borders["Right"].Transform = new Transform2D(0, new Vector2(windowSize.X, windowSize.Y / 2));
 	} 
 }

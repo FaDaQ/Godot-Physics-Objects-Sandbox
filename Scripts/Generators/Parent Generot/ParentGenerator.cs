@@ -18,19 +18,21 @@ public partial class ParentGenerator : Node2D
 		_generatorPosition = GetViewport().GetMousePosition();
 		_parent = GetParent<Node2D>();
 		_timer = GetChild<Timer>(1);
+		Settings crutch = new Settings();
 		foreach (var i in GetChildren())
 		{
-			Settings crutch = new Settings();
-			i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
-			i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
+			if (!(i is Timer))
+			{
+				i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
+				i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
+			}
 		}
 		foreach (var i in GetChild(0).GetChildren())
 		{
-			Settings crutch = new Settings();
 			i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
 			i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
 		}
-
+		Settings.AnyEntity.Add(this);
 	}
 	public override void _Process(double delta)
 	{
@@ -60,6 +62,7 @@ public partial class ParentGenerator : Node2D
 	public void CloseGeneratorPanel()
 	{
 		_parent.RemoveChild(this);
+		Settings.AnyEntity.Remove(this);
 		ObjectsSpawn.Generators.Remove(this);
 		Settings.userIsInteractGUI = false;
 	}

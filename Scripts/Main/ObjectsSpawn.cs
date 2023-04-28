@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class ObjectsSpawn : Node2D
 {
@@ -8,8 +9,7 @@ public partial class ObjectsSpawn : Node2D
 	public static List<ParentGenerator> Generators = new List<ParentGenerator>();
 
 	public static PackedScene bodyScene;
-
-
+	
 	public override void _Ready()
 	{
 		bodyScene = (PackedScene)ResourceLoader.Load($"res://Scenes/RigidBodies/{Settings.currentObjectName}.tscn");
@@ -35,6 +35,11 @@ public partial class ObjectsSpawn : Node2D
 		{
 			ClearGenerators();
 		}
+		else if (Input.IsActionJustPressed("cancelAction"))
+		{
+			Settings.CancelAction();
+            Settings.userIsInteractGUI = false;
+        }
 	}
 	private void _AddObject()
 	{
@@ -58,6 +63,7 @@ public partial class ObjectsSpawn : Node2D
 			body.PhysicsMaterialOverride = uniquePhysicMaterial;
 
 			RigidBodies.Add(body);
+            Settings.AnyEntity.Add(body);
 			AddChild(body);
 		}
 		else if (Settings.currentObjectName.Contains("Generator: "))
@@ -88,6 +94,16 @@ public partial class ObjectsSpawn : Node2D
 		list.Clear();
 	}
 
-	public void ClearBodies() { ClearListAndDeleteChilds(RigidBodies); }
-	public void ClearGenerators() { ClearListAndDeleteChilds(Generators); }
+	public void ClearBodies()
+	{
+        Settings.AnyEntity.ForEach(node => { if (node is RigidBody2D) node.Cancel(); });
+		for (int i = RigidBodies.Count - 1; i >= 0; i--)
+			Settings.AnyEntity.Remove(RigidBodies[i]);
+		RigidBodies.Clear();
+	}
+	public void ClearGenerators()
+	{
+		ClearListAndDeleteChilds(Generators);
+        Settings.AnyEntity.ForEach(node => { if (node is ParentGenerator) node.Cancel(); });
+    }
 }

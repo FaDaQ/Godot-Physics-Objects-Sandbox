@@ -6,6 +6,8 @@
 
 [node name="Rectangle" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_25atw")
+max_contacts_reported = 99
+contact_monitor = true
 
 [node name="RectangleDeffault2" type="Sprite2D" parent="."]
 texture = ExtResource("1_e8yft")

@@ -1,30 +1,30 @@
-[gd_scene load_steps=18 format=3 uid="uid://dlhi26p0dbuw6"]
+[gd_scene load_steps=19 format=3 uid="uid://cb7ykiq6bytbm"]
 
 [ext_resource type="Script" path="res://Scripts/Main/Root.cs" id="1_50ubk"]
 [ext_resource type="Script" path="res://Scripts/Main/Drawer.cs" id="2_vydgd"]
 [ext_resource type="Script" path="res://TestClick.cs" id="3_hkr0f"]
-[ext_resource type="Script" path="res://Scripts/Main/FPSLabel.cs" id="3_vjahl"]
-[ext_resource type="Script" path="res://Scripts/Main/ObjectsCounter.cs" id="4_hibym"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/FPSLabel.cs" id="3_qsucl"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/ObjectsCounter.cs" id="4_a1f3k"]
 [ext_resource type="Script" path="res://Scripts/Main/ObjectsSpawn.cs" id="5_n56qq"]
 [ext_resource type="Script" path="res://Scripts/Main/CollisionArea.cs" id="6_jnarl"]
 [ext_resource type="Script" path="res://Scripts/Main/Settings.cs" id="7_14ds1"]
-[ext_resource type="Script" path="res://Scripts/Main/SelectRigidBody.cs" id="8_ljrv1"]
-[ext_resource type="Script" path="res://Scripts/Main/BodySettingsWindow.cs" id="10_a8kfg"]
-[ext_resource type="Script" path="res://Scripts/Main/ParametrsChange_ConnectingSignals.cs" id="11_xm3ky"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/SelectRigidBody.cs" id="8_fhri7"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/BodySettingsWindow.cs" id="10_82ybi"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/ParametrsChange_ConnectingSignals.cs" id="11_lihge"]
 [ext_resource type="Script" path="res://Scripts/Main/Borders Scripts/BorderSettingsVBox_ConnectingSignals.cs" id="12_15qde"]
-[ext_resource type="Script" path="res://Scripts/Main/PausedLabel.cs" id="13_tp23d"]
-[ext_resource type="Script" path="res://Scripts/Main/ControlsPanel.cs" id="14_lyvis"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/PausedLabel.cs" id="13_d5me0"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/ControlsPanel.cs" id="14_5mu47"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_yecvf"]
-a = Vector2(1280, 720)
-b = Vector2(0, 720)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x7eqj"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_eqkoi"]
-b = Vector2(0, 720)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_semfh"]
+normal = Vector2(1, 0)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_va8wq"]
-a = Vector2(1280, 0)
-b = Vector2(1280, 720)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hjkvn"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7rvy5"]
+radius = 4.12311
 
 [node name="Root" type="Node2D"]
 script = ExtResource("1_50ubk")
@@ -45,7 +45,7 @@ offset_top = 37.0
 offset_right = 126.0
 offset_bottom = 64.0
 text = "FPS: "
-script = ExtResource("3_vjahl")
+script = ExtResource("3_qsucl")
 
 [node name="Objects Counter" type="Label" parent="Panel Container/Drawer"]
 top_level = true
@@ -54,7 +54,7 @@ offset_top = 58.0
 offset_right = 129.0
 offset_bottom = 84.0
 text = "Objects: "
-script = ExtResource("4_hibym")
+script = ExtResource("4_a1f3k")
 
 [node name="Objects" type="Node2D" parent="Panel Container/Drawer"]
 script = ExtResource("5_n56qq")
@@ -63,14 +63,23 @@ script = ExtResource("5_n56qq")
 script = ExtResource("6_jnarl")
 
 [node name="Floor" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
-shape = SubResource("SegmentShape2D_yecvf")
+position = Vector2(640, 720)
+shape = SubResource("WorldBoundaryShape2D_x7eqj")
 one_way_collision_margin = 0.0
 
 [node name="Left" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
-shape = SubResource("SegmentShape2D_eqkoi")
+position = Vector2(0, 360)
+shape = SubResource("WorldBoundaryShape2D_semfh")
 
 [node name="Right" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
-shape = SubResource("SegmentShape2D_va8wq")
+position = Vector2(1280, 360)
+shape = SubResource("WorldBoundaryShape2D_hjkvn")
+
+[node name="Mouse Position Area" type="Area2D" parent="Panel Container/Drawer/Collision Area"]
+position = Vector2(100, 300)
+
+[node name="Mouse Collision" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area/Mouse Position Area"]
+shape = SubResource("CircleShape2D_7rvy5")
 
 [node name="Settings" type="Node2D" parent="."]
 script = ExtResource("7_14ds1")
@@ -116,8 +125,7 @@ popup/item_7/id = 7
 popup/item_7/separator = true
 popup/item_8/text = "Interaction: Atomic Bomb"
 popup/item_8/id = 8
-popup/item_8/disabled = true
-script = ExtResource("8_ljrv1")
+script = ExtResource("8_fhri7")
 
 [node name="Gravity" type="LineEdit" parent="UI/Top MenuBar/Top Menu HBox"]
 layout_mode = 2
@@ -150,6 +158,7 @@ layout_mode = 2
 text = "Borders"
 
 [node name="Down MenuBar" type="MenuBar" parent="UI"]
+visible = false
 layout_mode = 0
 offset_top = 682.0
 offset_right = 1280.0
@@ -161,91 +170,88 @@ offset_right = 1152.0
 offset_bottom = 36.0
 
 [node name="Button" type="Button" parent="UI/Down MenuBar/HBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Test Click"
 script = ExtResource("3_hkr0f")
 
-[node name="Body Settings Panel" type="PanelContainer" parent="UI"]
+[node name="RigidBody Settings Panel" type="PanelContainer" parent="UI"]
 visible = false
 self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
 layout_mode = 0
-offset_left = 513.0
-offset_top = 161.0
-offset_right = 734.0
-offset_bottom = 504.0
-script = ExtResource("10_a8kfg")
+offset_right = 221.0
+offset_bottom = 343.0
+script = ExtResource("10_82ybi")
 
-[node name="Columns" type="HBoxContainer" parent="UI/Body Settings Panel"]
+[node name="Columns" type="HBoxContainer" parent="UI/RigidBody Settings Panel"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Parametrs Names" type="VBoxContainer" parent="UI/Body Settings Panel/Columns"]
+[node name="Parametrs Names" type="VBoxContainer" parent="UI/RigidBody Settings Panel/Columns"]
 layout_mode = 2
 
-[node name="Mass" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Mass" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Mass"
 
-[node name="Bounce" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Bounce" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 20
 text = "Bounce"
 
-[node name="Friction" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Friction" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Friction"
 
-[node name="Torque" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Torque" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Torque"
 
-[node name="Inertia (work with BUG)" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Inertia (work with BUG)" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Inertia"
 
-[node name="Scale" type="Label" parent="UI/Body Settings Panel/Columns/Parametrs Names"]
+[node name="Scale" type="Label" parent="UI/RigidBody Settings Panel/Columns/Parametrs Names"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Scale"
 
-[node name="Parametrs Change" type="VBoxContainer" parent="UI/Body Settings Panel/Columns"]
+[node name="Parametrs Change" type="VBoxContainer" parent="UI/RigidBody Settings Panel/Columns"]
 layout_mode = 2
 size_flags_horizontal = 0
-script = ExtResource("11_xm3ky")
+script = ExtResource("11_lihge")
 
-[node name="Mass Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Mass Edit" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "1"
 placeholder_text = "kg"
 alignment = 1
 
-[node name="Bounce Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Bounce Edit" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 layout_mode = 2
 text = "0.5"
 alignment = 1
 
-[node name="Friction Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Friction Edit" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 layout_mode = 2
 text = "1"
 alignment = 1
 
-[node name="Torque Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Torque Edit" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 layout_mode = 2
 text = "0"
 placeholder_text = "Const"
 alignment = 1
 
-[node name="Inertia Edit (work with BUG)" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Inertia Edit (work with BUG)" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -253,13 +259,13 @@ text = "1"
 placeholder_text = "kg • px^2"
 alignment = 1
 
-[node name="Scale Edit" type="LineEdit" parent="UI/Body Settings Panel/Columns/Parametrs Change"]
+[node name="Scale Edit" type="LineEdit" parent="UI/RigidBody Settings Panel/Columns/Parametrs Change"]
 layout_mode = 2
 text = "1"
 placeholder_text = "Scaling"
 alignment = 1
 
-[node name="Close" type="Button" parent="UI/Body Settings Panel"]
+[node name="Close" type="Button" parent="UI/RigidBody Settings Panel"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -308,7 +314,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Paused"
 horizontal_alignment = 2
-script = ExtResource("13_tp23d")
+script = ExtResource("13_d5me0")
 
 [node name="Controls Panel" type="PanelContainer" parent="UI"]
 visible = false
@@ -318,7 +324,7 @@ offset_left = 432.0
 offset_top = 144.0
 offset_right = 798.0
 offset_bottom = 524.0
-script = ExtResource("14_lyvis")
+script = ExtResource("14_5mu47")
 
 [node name="VBox 0" type="VBoxContainer" parent="UI/Controls Panel"]
 layout_mode = 2
@@ -376,6 +382,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "✖"
 
+[connection signal="body_entered" from="Panel Container/Drawer/Collision Area/Mouse Position Area" to="Panel Container/Drawer/Collision Area" method="GetObjectsUnderMouse"]
 [connection signal="item_selected" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" method="SetCurrentBodyID"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userEndInteractWithGUI"]
@@ -384,7 +391,7 @@ text = "✖"
 [connection signal="text_changed" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="GravityChanged"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="UI/Body Settings Panel" method="ShowWindow"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="UI/RigidBody Settings Panel" method="ShowWindow"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Panel Container/Drawer/Objects" method="ClearBodies"]
@@ -399,12 +406,12 @@ text = "✖"
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="UI/Controls Panel" method="ShowWindow"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Body Settings Panel" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Body Settings Panel" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="hidden" from="UI/Body Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Body Settings Panel/Close" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Body Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Body Settings Panel/Close" to="UI/Body Settings Panel" method="ShowWindow"]
+[connection signal="mouse_entered" from="UI/RigidBody Settings Panel" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/RigidBody Settings Panel" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="hidden" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/RigidBody Settings Panel/Close" to="UI/RigidBody Settings Panel" method="ShowWindow"]
 [connection signal="mouse_entered" from="UI/Border Settings Panel" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Border Settings Panel" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="mouse_entered" from="UI/Controls Panel" to="Settings" method="userInteractWithGUI"]

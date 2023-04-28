@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://d3tdnevt6v6up" path="res://Sprites/Star Deffault.svg" id="1_th74e"]
 
 [node name="Star" type="RigidBody2D"]
+max_contacts_reported = 99
+contact_monitor = true
 
 [node name="StarDeffault" type="Sprite2D" parent="."]
 texture = ExtResource("1_th74e")

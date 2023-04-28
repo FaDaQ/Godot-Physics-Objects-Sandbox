@@ -50,6 +50,8 @@ public partial class BodiesGenerator : ParentGenerator
 		body.AddConstantTorque(parametrs["Torque"] * 100);
 
 		ObjectsSpawn.RigidBodies.Add(body);
+		Settings.AnyEntity.Add(body);
+
 		_parent.AddChild(body);
 	}
 	public override void SetupOver()

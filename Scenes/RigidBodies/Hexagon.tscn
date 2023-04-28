@@ -6,6 +6,8 @@
 
 [node name="Hexagon" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_uwg5a")
+max_contacts_reported = 99
+contact_monitor = true
 
 [node name="HexagonDeffault" type="Sprite2D" parent="."]
 texture = ExtResource("1_1skij")

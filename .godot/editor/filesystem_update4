@@ -1,4 +1,3 @@
 res://Scenes/Root.tscn
-res://Scenes/InteractionObjects/Atomic Bomb.tscn
-res://Scenes/RigidBodies/Hexagon.tscn
-res://Scenes/Generators/Parent Generator.tscn
+res://Scripts/Main/UI/SelectRigidBody.cs
+res://changelog v1.6.txt

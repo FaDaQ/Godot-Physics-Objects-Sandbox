@@ -43,8 +43,12 @@ public partial class CollisionArea : StaticBody2D
 	private Vector2 _from;
 	private Vector2 _to;
 
+	public static Area2D MouseCollisionArea;
+	public static RigidBody2D MouseSelectedObject;
+
 	public override void _Ready()
 	{
+		MouseCollisionArea = GetNode<Area2D>("Mouse Position Area");
 	}
 	public override void _Process(double delta)
 	{
@@ -58,39 +62,50 @@ public partial class CollisionArea : StaticBody2D
 
 		if (Input.IsActionJustReleased("clearCollisionLines"))
 			ClearCollisionLines();
+		if (Input.IsActionJustReleased("deleteBody"))
+		{
+			Settings.AnyEntity.Remove(MouseSelectedObject);
+			ObjectsSpawn.RigidBodies.Remove(MouseSelectedObject);
+			MouseSelectedObject.Cancel();
+		}
 
 		_drawStraightLine = Input.IsActionPressed("drawStraightCollisionLine");
-		
-		if (@event is InputEventMouseMotion && _mousePressed)
-		{
-			if (!_drawStraightLine)
-			{
-				_to = GetViewport().GetMousePosition();
-				_currentLinePoints.Add(_to);
-				_currentLine.Points = _currentLinePoints.ToArray();
-				_currentLine.AddCollision(new SegmentShape2D() { A = _from, B = _to });
-				_from = _to;
-			}
-			else
-			{
-				_to = GetViewport().GetMousePosition();
 
-				if (_currentLinePoints.Count < 2)
+		if (@event is InputEventMouseMotion)
+		{
+			Vector2 mousePosition = GetViewport().GetMousePosition();
+			if (_mousePressed)
+			{
+				if (!_drawStraightLine)
 				{
+					_to = mousePosition;
 					_currentLinePoints.Add(_to);
+					_currentLine.Points = _currentLinePoints.ToArray();
 					_currentLine.AddCollision(new SegmentShape2D() { A = _from, B = _to });
+					_from = _to;
 				}
 				else
 				{
-					_currentLinePoints[1] = _to;
+					_to = mousePosition;
+
+					if (_currentLinePoints.Count < 2)
+					{
+						_currentLinePoints.Add(_to);
+						_currentLine.AddCollision(new SegmentShape2D() { A = _from, B = _to });
+					}
+					else
+					{
+						_currentLinePoints[1] = _to;
+					}
+					_currentLine.Points = _currentLinePoints.ToArray();
+					_currentLine.collisionArea.GetChild<CollisionShape2D>(0).Shape = new SegmentShape2D() { A = _from, B = _to };
 				}
-				_currentLine.Points = _currentLinePoints.ToArray();
-				_currentLine.collisionArea.GetChild<CollisionShape2D>(0).Shape = new SegmentShape2D() { A = _from, B = _to };
 			}
+
+			MouseCollisionArea.Position = mousePosition;
 		}
 		
 	}
-
 	public void GetStartedDrawLine()
 	{
 		_mousePressed = true;
@@ -99,6 +114,7 @@ public partial class CollisionArea : StaticBody2D
 		if (_drawStraightLine)
 			_currentLine.collisionArea.AddChild(new CollisionShape2D());
 		_collisionsLines.Add(_currentLine);
+		Settings.AnyEntity.Add(_currentLine);
 		AddChild(_currentLine);
 
 		_from = GetViewport().GetMousePosition();
@@ -111,8 +127,19 @@ public partial class CollisionArea : StaticBody2D
 	}
 	public void ClearCollisionLines()
 	{
-		_collisionsLines.ForEach(line => line.Remove());
+
+		Settings.AnyEntity.ForEach(node =>
+		{
+			if (node is CollisionLine) node.Cancel();
+		});
+		for (int i = _collisionsLines.Count - 1; i >= 0; i--)
+			Settings.AnyEntity.Remove(_collisionsLines[i]);
 		_collisionsLines.Clear();
 		ObjectsSpawn.RigidBodies.ForEach(body => body.ApplyForce(new Vector2(0, 0)));
+	}
+	public void GetObjectsUnderMouse(Node2D body)
+	{
+		if (body is RigidBody2D rigidBody)
+			MouseSelectedObject = rigidBody;
 	}
 }

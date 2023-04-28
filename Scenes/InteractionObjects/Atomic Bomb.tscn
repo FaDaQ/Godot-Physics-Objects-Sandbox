@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://chs86gxfbh3ak"]
+[gd_scene load_steps=8 format=3 uid="uid://b3e7bkoka3a4p"]
 
-[ext_resource type="Script" path="res://Scripts/Interaction Objects/AtomicBomb.cs" id="1_4n7nx"]
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/AtomicBomb.cs" id="1_h3ynq"]
 [ext_resource type="Texture2D" uid="uid://btas03cddkrq5" path="res://Sprites/Atomic Bomb.svg" id="1_w3v3o"]
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/AtomicBombSettingsPanel.cs" id="3_84j83"]
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/AtomicBombParametrsChange.cs" id="4_0hipa"]
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/Apply.cs" id="5_gofbj"]
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/Close.cs" id="6_5r8ci"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck6jy"]
 radius = 30.0
@@ -11,7 +15,8 @@ height = 106.0
 mass = 1000.0
 max_contacts_reported = 100
 contact_monitor = true
-script = ExtResource("1_4n7nx")
+freeze = true
+script = ExtResource("1_h3ynq")
 
 [node name="AtomicBomb" type="Sprite2D" parent="."]
 texture = ExtResource("1_w3v3o")
@@ -19,3 +24,82 @@ texture = ExtResource("1_w3v3o")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
 shape = SubResource("CapsuleShape2D_ck6jy")
+
+[node name="Atomic Bomb Settings Panel" type="PanelContainer" parent="."]
+process_mode = 3
+self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
+offset_right = 183.0
+offset_bottom = 150.0
+script = ExtResource("3_84j83")
+
+[node name="Parametrs Names" type="VBoxContainer" parent="Atomic Bomb Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Fall Speed" type="Label" parent="Atomic Bomb Settings Panel/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Fall Speed"
+
+[node name="Explosive Power" type="Label" parent="Atomic Bomb Settings Panel/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Explosive Power"
+
+[node name="Explosive Radius" type="Label" parent="Atomic Bomb Settings Panel/Parametrs Names"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Explosive Radius"
+
+[node name="Parametrs Change" type="VBoxContainer" parent="Atomic Bomb Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+script = ExtResource("4_0hipa")
+
+[node name="Fall Speed Edit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+alignment = 1
+
+[node name="Explosive Power Edit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1000"
+alignment = 1
+
+[node name="Explosive Radius Edit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "10"
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
+visible = false
+layout_mode = 2
+
+[node name="Apply" type="Button" parent="Atomic Bomb Settings Panel"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+text = "Apply"
+script = ExtResource("5_gofbj")
+
+[node name="Close" type="Button" parent="Atomic Bomb Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "✖"
+script = ExtResource("6_5r8ci")
+
+[node name="Эта кнопка существует только потому, что если её не будет - окно с настройками будет автоматически закрываться и Я БЕЗ ЕДИНОГО ПОНЯТИЯ почему так, но движок по каким-то причинам сам решает что нужно нажать самую последнюю кнопку в дереве" type="Button" parent="Atomic Bomb Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+disabled = true
+flat = true

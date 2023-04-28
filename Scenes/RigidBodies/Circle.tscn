@@ -9,6 +9,8 @@ radius = 37.054
 
 [node name="Circle" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_l4fwt")
+max_contacts_reported = 99
+contact_monitor = true
 
 [node name="CircleDeffault2" type="Sprite2D" parent="."]
 texture = ExtResource("1_c8ddj")
