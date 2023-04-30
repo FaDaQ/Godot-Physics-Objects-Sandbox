@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/Apply.cs" id="5_gofbj"]
 [ext_resource type="Script" path="res://Scripts/Interaction Objects/Atomic Bomb/Close.cs" id="6_5r8ci"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck6jy"]
-radius = 30.0
-height = 106.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dnc16"]
+radius = 29.0
+height = 102.0
 
 [node name="Atomic Bomb" type="RigidBody2D"]
 mass = 1000.0
@@ -21,9 +21,11 @@ script = ExtResource("1_h3ynq")
 [node name="AtomicBomb" type="Sprite2D" parent="."]
 texture = ExtResource("1_w3v3o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Bomb Hitbox Area" type="Area2D" parent="."]
 position = Vector2(0, 15)
-shape = SubResource("CapsuleShape2D_ck6jy")
+
+[node name="Bomb Hitbox" type="CollisionShape2D" parent="Bomb Hitbox Area"]
+shape = SubResource("CapsuleShape2D_dnc16")
 
 [node name="Atomic Bomb Settings Panel" type="PanelContainer" parent="."]
 process_mode = 3

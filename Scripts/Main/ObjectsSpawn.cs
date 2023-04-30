@@ -6,7 +6,7 @@ using System.Linq;
 public partial class ObjectsSpawn : Node2D
 {
 	public static List<RigidBody2D> RigidBodies = new List<RigidBody2D>();
-	public static List<ParentGenerator> Generators = new List<ParentGenerator>();
+	public static List<Generator> Generators = new List<Generator>();
 
 	public static PackedScene bodyScene;
 	
@@ -38,13 +38,14 @@ public partial class ObjectsSpawn : Node2D
 		else if (Input.IsActionJustPressed("cancelAction"))
 		{
 			Settings.CancelAction();
-            Settings.userIsInteractGUI = false;
-        }
+			Settings.userIsInteractGUI = false;
+		}
 	}
 	private void _AddObject()
 	{
-        string bodySceneName = Settings.currentObjectName.Substring(Settings.currentObjectName.IndexOf(":") + 2);
-        if (Settings.currentObjectName.Contains("Body: "))
+		string bodySceneName = Settings.currentObjectName.Substring(Settings.currentObjectName.IndexOf(":") + 2);
+		Random rnd = new Random();
+		if (Settings.currentObjectName.Contains("Body: "))
 		{
 			RigidBody2D body = (RigidBody2D)bodyScene.Instantiate();
 			body.Position = GetViewport().GetMousePosition();
@@ -58,18 +59,29 @@ public partial class ObjectsSpawn : Node2D
 
 			body.GravityScale = Settings.Gravity;
 			body.Mass = Settings.physicsParametrs["Mass"];
-			body.AddConstantTorque(Settings.physicsParametrs["Torque"] * 100 * body.Mass);
+			body.AddConstantTorque(Settings.physicsParametrs["Torque"] * 100 * body.Mass); // 100 - In order not to use huge numbers
 			//body.Inertia = Settings.physicsParametrs["Inertia"];
 			body.PhysicsMaterialOverride = uniquePhysicMaterial;
 
+			if (Settings.RandomColors)
+				body.GetChild<Sprite2D>(0).SelfModulate = new Color(rnd.NextSingle(), rnd.NextSingle(), rnd.NextSingle());
+			if (Settings.RandomTorque)
+				body.ConstantTorque = rnd.Next(-Settings.MaxRandomTorque, Settings.MaxRandomTorque) * 100 * body.Mass;
+			if (Settings.RandomScale)
+			{
+				float scaleValue = rnd.NextSingle() * (Settings.MaxRandomScale - Settings.MinRandomScale) + Settings.MinRandomScale;
+				body.GetChild<Sprite2D>(0).Scale = new Vector2(scaleValue, scaleValue);
+				body.GetChild<Node2D>(1).Scale = new Vector2(scaleValue, scaleValue);
+			}
+
 			RigidBodies.Add(body);
-            Settings.AnyEntity.Add(body);
+			Settings.AnyEntity.Add(body);
 			AddChild(body);
 		}
 		else if (Settings.currentObjectName.Contains("Generator: "))
 		{
-            PackedScene generatorScene = (PackedScene)ResourceLoader.Load($"res://Scenes/Generators/{bodySceneName}.tscn");
-			ParentGenerator generator = (ParentGenerator)generatorScene.Instantiate();
+			PackedScene generatorScene = (PackedScene)ResourceLoader.Load($"res://Scenes/Generators/{bodySceneName}.tscn");
+			Generator generator = (Generator)generatorScene.Instantiate();
 			generator.Position = GetViewport().GetMousePosition();
 
 			Generators.Add(generator);
@@ -80,12 +92,12 @@ public partial class ObjectsSpawn : Node2D
 			if (bodySceneName == "Atomic Bomb")
 			{
 				PackedScene bombScene = (PackedScene)ResourceLoader.Load($"res://Scenes/InteractionObjects/{bodySceneName}.tscn");
-                RigidBody2D body = (RigidBody2D)bombScene.Instantiate();
-                body.Position = GetViewport().GetMousePosition();
+				RigidBody2D body = (RigidBody2D)bombScene.Instantiate();
+				body.Position = GetViewport().GetMousePosition();
 
-                RigidBodies.Add(body);
-                AddChild(body);
-            }
+				RigidBodies.Add(body);
+				AddChild(body);
+			}
 		}
 	}
 	public void ClearListAndDeleteChilds<T>(List<T> list)
@@ -96,14 +108,25 @@ public partial class ObjectsSpawn : Node2D
 
 	public void ClearBodies()
 	{
-        Settings.AnyEntity.ForEach(node => { if (node is RigidBody2D) node.Cancel(); });
+		Settings.AnyEntity.ForEach(node => { if (node is RigidBody2D) node.Cancel(); });
 		for (int i = RigidBodies.Count - 1; i >= 0; i--)
 			Settings.AnyEntity.Remove(RigidBodies[i]);
 		RigidBodies.Clear();
 	}
 	public void ClearGenerators()
 	{
-		ClearListAndDeleteChilds(Generators);
-        Settings.AnyEntity.ForEach(node => { if (node is ParentGenerator) node.Cancel(); });
-    }
+		Settings.AnyEntity.ForEach(node => { if (node is Generator generator) generator.Cancel(); });
+
+		List<Generator> list = Settings.AnyEntity.OfType<Generator>().ToList();
+		foreach (var i in list)
+			Settings.AnyEntity.Remove(i);
+
+		Generators.Clear();
+	}
+	public void ClearAllObjects() // Connecting to Clear All Button
+	{
+		ClearBodies();
+		ClearGenerators();
+		CollisionArea.ClearCollisionLines();
+	}
 }

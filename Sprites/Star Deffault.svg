@@ -1,5 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="135px" height="115px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g><path style="opacity:0.998" fill="#0a0a0a" d="M 66.5,5.5 C 67.7206,6.02832 68.8873,6.69499 70,7.5C 74.4522,17.5248 79.2855,27.3581 84.5,37C 94.3899,39.1279 104.39,40.7946 114.5,42C 119.299,41.7923 121.132,43.9589 120,48.5C 111.557,55.9413 103.39,63.7747 95.5,72C 97.6558,82.7636 99.6558,93.597 101.5,104.5C 101.225,106.609 100.058,107.942 98,108.5C 87.4,103.7 77.0667,98.3666 67,92.5C 57.372,98.0639 47.5387,103.231 37.5,108C 34.0935,109.24 32.4269,108.073 32.5,104.5C 34.0372,94.1469 35.7039,83.8136 37.5,73.5C 37.1667,72.5 36.8333,71.5 36.5,70.5C 27.9838,62.8173 19.9838,54.6507 12.5,46C 13.4992,43.2389 15.4992,41.9056 18.5,42C 28.5433,40.6617 38.5433,39.1617 48.5,37.5C 53.9219,27.6569 59.0886,17.6569 64,7.5C 64.9947,6.93406 65.828,6.26739 66.5,5.5 Z"/></g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 135 115" style="enable-background:new 0 0 135 115;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.998;fill-rule:evenodd;clip-rule:evenodd;fill:#282828;enable-background:new    ;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#4C4C4C;stroke:#E0E0E0;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st0" d="M66.5,5.5c1.2,0.5,2.4,1.2,3.5,2c4.5,10,9.3,19.9,14.5,29.5c9.9,2.1,19.9,3.8,30,5c4.8-0.2,6.6,2,5.5,6.5
+		c-8.4,7.4-16.6,15.3-24.5,23.5c2.2,10.8,4.2,21.6,6,32.5c-0.3,2.1-1.4,3.4-3.5,4c-10.6-4.8-20.9-10.1-31-16
+		c-9.6,5.6-19.5,10.7-29.5,15.5c-3.4,1.2-5.1,0.1-5-3.5c1.5-10.4,3.2-20.7,5-31c-0.3-1-0.7-2-1-3C28,62.8,20,54.7,12.5,46
+		c1-2.8,3-4.1,6-4c10-1.3,20-2.8,30-4.5c5.4-9.8,10.6-19.8,15.5-30C65,6.9,65.8,6.3,66.5,5.5z"/>
+</g>
+<circle class="st1" cx="67.1" cy="61.5" r="26.1"/>
+<polygon class="st1" points="73.6,72.4 60.9,72.6 54.4,61.8 60.5,50.7 73.2,50.5 79.7,61.3 "/>
 </svg>

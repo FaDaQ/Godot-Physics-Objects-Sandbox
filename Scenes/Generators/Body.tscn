@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://diqodo2c24xo1"]
 
-[ext_resource type="PackedScene" uid="uid://dtxty5j3g3yq0" path="res://Scenes/Generators/Parent Generator.tscn" id="1_61btc"]
+[ext_resource type="PackedScene" uid="uid://ckcw40ix64dc6" path="res://Scenes/Generators/Parent Generator.tscn" id="1_61btc"]
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs" id="1_euen6"]
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/SelectGeneratorBody.cs" id="3_040rv"]
 
-[node name="Inh Bodies Generator" instance=ExtResource("1_61btc")]
+[node name="Bodies Generator" instance=ExtResource("1_61btc")]
 script = ExtResource("1_euen6")
 
 [node name="Generator Settings Panel" parent="." index="0"]

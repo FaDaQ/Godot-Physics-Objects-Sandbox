@@ -3,13 +3,14 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
-public partial class BodiesGenerator : ParentGenerator
+public partial class BodiesGenerator : Generator
 {
 	private Array<Node> namesArr;
 	private Array<Node> parametrsArr;
 	public Godot.Collections.Dictionary<string, float> parametrs = new Godot.Collections.Dictionary<string, float>();
 	private string _bodyName;
 	private Vector2 _bodyScale;
+	Random rnd = new Random();
 
 	public override void _Ready()
 	{
@@ -48,6 +49,9 @@ public partial class BodiesGenerator : ParentGenerator
 		//body.Inertia = Settings.physicsParametrs["Inertia"];
 		body.PhysicsMaterialOverride = uniquePhysicMaterial;
 		body.AddConstantTorque(parametrs["Torque"] * 100);
+
+		if (Settings.RandomColors)
+			body.GetChild<Sprite2D>(0).SelfModulate = new Color(rnd.NextSingle(), rnd.NextSingle(), rnd.NextSingle());
 
 		ObjectsSpawn.RigidBodies.Add(body);
 		Settings.AnyEntity.Add(body);

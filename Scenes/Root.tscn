@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cb7ykiq6bytbm"]
+[gd_scene load_steps=23 format=3 uid="uid://cmj11ug4c064m"]
 
 [ext_resource type="Script" path="res://Scripts/Main/Root.cs" id="1_50ubk"]
 [ext_resource type="Script" path="res://Scripts/Main/Drawer.cs" id="2_vydgd"]
@@ -14,6 +14,10 @@
 [ext_resource type="Script" path="res://Scripts/Main/Borders Scripts/BorderSettingsVBox_ConnectingSignals.cs" id="12_15qde"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/PausedLabel.cs" id="13_d5me0"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/ControlsPanel.cs" id="14_5mu47"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/RandomTorqueLabel.cs" id="14_628d7"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/RandomScaleLabel.cs" id="15_ns4is"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsPanel.cs" id="16_kserg"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsVBox.cs" id="17_c6jl8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x7eqj"]
 
@@ -89,7 +93,8 @@ process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1282.0
-offset_bottom = 40.0
+offset_bottom = 719.0
+mouse_filter = 2
 
 [node name="Top MenuBar" type="MenuBar" parent="UI"]
 layout_mode = 0
@@ -148,14 +153,22 @@ text = "Clear Generators"
 layout_mode = 2
 text = "Clear Lines"
 
-[node name="Controls Guide" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
-layout_mode = 2
-text = "Controls"
-
 [node name="Borders Setting" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
 visible = false
 layout_mode = 2
 text = "Borders"
+
+[node name="Special Settings" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Special Settings"
+
+[node name="Clear All" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Clear All"
+
+[node name="Controls Guide" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Guide"
 
 [node name="Down MenuBar" type="MenuBar" parent="UI"]
 visible = false
@@ -177,9 +190,18 @@ script = ExtResource("3_hkr0f")
 [node name="RigidBody Settings Panel" type="PanelContainer" parent="UI"]
 visible = false
 self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
-layout_mode = 0
-offset_right = 221.0
-offset_bottom = 343.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -171.5
+offset_right = 110.5
+offset_bottom = 171.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("10_82ybi")
 
 [node name="Columns" type="HBoxContainer" parent="UI/RigidBody Settings Panel"]
@@ -303,27 +325,51 @@ layout_mode = 2
 text = "Right"
 
 [node name="Other Options" type="VBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = 1137.0
-offset_right = 1271.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
 offset_bottom = 720.0
+grow_horizontal = 0
+mouse_filter = 2
 
 [node name="Paused" type="Label" parent="UI/Other Options"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "Paused"
 horizontal_alignment = 2
 script = ExtResource("13_d5me0")
 
+[node name="Random Torque" type="Label" parent="UI/Other Options"]
+visible = false
+layout_mode = 2
+text = "Max Random Torque:"
+script = ExtResource("14_628d7")
+
+[node name="Random Scale" type="Label" parent="UI/Other Options"]
+visible = false
+layout_mode = 2
+text = "Max Random Scale:"
+script = ExtResource("15_ns4is")
+
 [node name="Controls Panel" type="PanelContainer" parent="UI"]
 visible = false
 self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
-layout_mode = 0
-offset_left = 432.0
-offset_top = 144.0
-offset_right = 798.0
-offset_bottom = 524.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -239.0
+offset_right = 210.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("14_5mu47")
 
 [node name="VBox 0" type="VBoxContainer" parent="UI/Controls Panel"]
@@ -342,6 +388,10 @@ text = "[Shift + LBM] - Spam Bodies"
 [node name="Clear Bodies Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
 text = "[Mouse Wheel Click] - Clean Bodies"
+
+[node name="Label" type="Label" parent="UI/Controls Panel/VBox 0"]
+layout_mode = 2
+text = "[RMB] - Delete Object"
 
 [node name="Seperator 1" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
@@ -372,11 +422,70 @@ text = "[Alt + G] - Clear Generators"
 layout_mode = 2
 text = "---------------------------------------------------------"
 
+[node name="Label2" type="Label" parent="UI/Controls Panel/VBox 0"]
+layout_mode = 2
+text = "[Ctrl + Z] - Cancel last spawn object or line"
+
+[node name="Seperator 4" type="Label" parent="UI/Controls Panel/VBox 0"]
+layout_mode = 2
+text = "---------------------------------------------------------"
+
 [node name="Fulscreen Mode Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
 text = "F11 - Set Fulcreen Mode"
 
 [node name="Button" type="Button" parent="UI/Controls Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "✖"
+
+[node name="Special Settings Panel" type="PanelContainer" parent="UI"]
+visible = false
+self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
+layout_mode = 0
+offset_left = 788.0
+offset_top = 43.0
+offset_right = 926.0
+offset_bottom = 272.0
+script = ExtResource("16_kserg")
+
+[node name="Special Settings VBox" type="VBoxContainer" parent="UI/Special Settings Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("17_c6jl8")
+
+[node name="Random Colors" type="CheckBox" parent="UI/Special Settings Panel/Special Settings VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Random Colors"
+
+[node name="Random Torque" type="CheckBox" parent="UI/Special Settings Panel/Special Settings VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Random Torque"
+
+[node name="Random Torque Slider" type="HSlider" parent="UI/Special Settings Panel/Special Settings VBox"]
+visible = false
+layout_mode = 2
+max_value = 2500.0
+
+[node name="Random Scale" type="CheckBox" parent="UI/Special Settings Panel/Special Settings VBox"]
+layout_mode = 2
+text = "Random Scale"
+
+[node name="Random Scale Slider" type="HSlider" parent="UI/Special Settings Panel/Special Settings VBox"]
+visible = false
+layout_mode = 2
+min_value = 0.05
+max_value = 10.0
+step = 0.05
+value = 0.05
+
+[node name="Close" type="Button" parent="UI/Special Settings Panel"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -401,11 +510,17 @@ text = "✖"
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Panel Container/Drawer/Collision Area" method="ClearCollisionLines"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="UI/Special Settings Panel" method="HidePanel"]
+[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userInteractWithGUI"]
+[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Panel Container/Drawer/Objects" method="ClearAllObjects"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="UI/Controls Panel" method="ShowWindow"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="mouse_entered" from="UI/RigidBody Settings Panel" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/RigidBody Settings Panel" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="hidden" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
@@ -419,3 +534,8 @@ text = "✖"
 [connection signal="mouse_entered" from="UI/Controls Panel/Button" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Controls Panel/Button" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Controls Panel/Button" to="UI/Controls Panel" method="ShowWindow"]
+[connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Colors" to="Settings" method="ApplyRandomColors"]
+[connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Torque" to="Settings" method="ApplyRandomTorque"]
+[connection signal="value_changed" from="UI/Special Settings Panel/Special Settings VBox/Random Torque Slider" to="Settings" method="SetMaxRandomTorque"]
+[connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Scale" to="Settings" method="ApplyRandomScale"]
+[connection signal="value_changed" from="UI/Special Settings Panel/Special Settings VBox/Random Scale Slider" to="Settings" method="SetMaxRandomScale"]

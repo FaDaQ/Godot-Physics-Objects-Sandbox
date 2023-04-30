@@ -3,21 +3,6 @@ using System;
 
 public static class Extension
 {
-    public static void ExplosionReact(this RigidBody2D body, float explosionPower)
-    {
-        int j = 1;
-        foreach (var i in body.GetCollidingBodies())
-        {
-            if (i is RigidBody2D collidingBody)
-                if (j % 2 == 0)
-                    collidingBody.ApplyForce(new Vector2(explosionPower, 0), new Vector2(0, explosionPower));
-                else
-                    collidingBody.ApplyForce(new Vector2(0, explosionPower), new Vector2(explosionPower, 0));
-
-            j++;
-        }
-    }
-
     public static void ConnectingUISignals_InContainer(this Container container)
     {
         Settings crutch = new Settings();
@@ -29,8 +14,7 @@ public static class Extension
         {
             i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
             i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
-            if (i is Button button)
-                button.Connect("hidden", Callable.From(() => crutch.userEndInteractWithGUI()));
+            i.Connect("hidden", Callable.From(() => crutch.userEndInteractWithGUI()));
         }
     }
 
@@ -47,5 +31,8 @@ public static class Extension
     public static void Cancel(this Node2D node)
     {
         node.GetParent().RemoveChild(node);
+#if DEBUG
+        Console.WriteLine($"Removing: [{node}] [{node.Name}]");
+#endif
     }
 }

@@ -11,8 +11,12 @@ public partial class ObjectsCounter : Label
 
 	public override void _Process(double delta)
 	{
+		if (_currentCount != ObjectsSpawn.RigidBodies.Count)
+		{
+			Text = $"Objects: {ObjectsSpawn.RigidBodies.Count}";
+			_currentCount = ObjectsSpawn.RigidBodies.Count;
+		}
 
-		Text = $"Objects: {ObjectsSpawn.RigidBodies.Count}";
 
 	}
 }

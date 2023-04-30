@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtxty5j3g3yq0"]
+[gd_scene load_steps=4 format=3 uid="uid://ckcw40ix64dc6"]
 
-[ext_resource type="Script" path="res://Scripts/Generators/Parent Generot/ParentGenerator.cs" id="1_hbhrq"]
+[ext_resource type="Script" path="res://Scripts/Generators/Parent Generot/Generator.cs" id="1_cixo8"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/ParametrsChange_ConnectingSignals.cs" id="2_oon71"]
 [ext_resource type="Script" path="res://Scripts/Generators/ApplyGeneratorButton.cs" id="4_bbl1v"]
 
 [node name="Parent Generator" type="Node2D"]
 process_mode = 1
 top_level = true
-script = ExtResource("1_hbhrq")
+script = ExtResource("1_cixo8")
 
 [node name="Generator Settings Panel" type="PanelContainer" parent="."]
 process_mode = 3

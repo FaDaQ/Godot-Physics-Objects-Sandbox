@@ -1,1 +1,11 @@
+Label
+HSlider
+VSlider
+CheckBox
+Button
+CollisionPolygon2D
+VBoxContainer
+PanelContainer
+CollisionShape2D
+Area2D
 Control

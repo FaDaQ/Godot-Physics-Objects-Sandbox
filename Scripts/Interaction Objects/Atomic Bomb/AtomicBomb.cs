@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System.Threading;
 using System;
 
 public partial class AtomicBomb : RigidBody2D
@@ -7,19 +8,17 @@ public partial class AtomicBomb : RigidBody2D
 	public float FallSpeed = 1f;
 	public float ExplosiveRadius = 10f;
 	public float ExplosivePower = 1000;
-	private Godot.Collections.Array<Node2D> _collidedObjects;
-
-	private double _waitTime = 0.05;
-	private double _currentTime = 0;
+	public Godot.Collections.Dictionary<string, float> parametrs = new Godot.Collections.Dictionary<string, float>();
 
 	private Array<Node> namesArr;
 	private Array<Node> parametrsArr;
-	public Godot.Collections.Dictionary<string, float> parametrs = new Godot.Collections.Dictionary<string, float>();
-	private string _bodyName;
-	private Vector2 _bodyScale;
+	private Area2D BombHitboxArea;
+	private bool collisionDetected = false;
+	private double _waiteableTime = 0.10;
 
 	public override void _Ready()
 	{
+		BombHitboxArea = GetNode<Area2D>("Bomb Hitbox Area");
 		namesArr = GetChild(2).GetChild(0).GetChildren();
 		parametrsArr = GetChild(2).GetChild(1).GetChildren();
 
@@ -38,22 +37,28 @@ public partial class AtomicBomb : RigidBody2D
 		ExplosiveRadius = parametrs["Explosive Radius"];
 		ExplosivePower = parametrs["Explosive Power"] * 100;
 
-		_collidedObjects = GetCollidingBodies();
-		if (_collidedObjects.Count > 0)
+		if (BombHitboxArea.GetOverlappingBodies().Count > 0 || collisionDetected)
 		{
+			BombHitboxArea.GetChild<CollisionShape2D>(0).Shape = new CircleShape2D() { Radius = ExplosiveRadius * 15 }; // 15 - for not writing too big number in parametr
+			_waiteableTime -= delta;
+			collisionDetected = true;
 			Hide();
-			GetChild<CollisionShape2D>(1).Shape = new CircleShape2D() { Radius = ExplosiveRadius * 10 }; // Why 10? Just...
-			_currentTime += delta;
 		}
-		if (_currentTime >= _waitTime)
+		if (_waiteableTime <= 0)
 		{
-			foreach (var i in _collidedObjects)
+			int j = 0;
+			foreach (Node2D i in BombHitboxArea.GetOverlappingBodies())
 			{
 				if (i is RigidBody2D body)
-					body.ExplosionReact(ExplosivePower);
+					body.ApplyForce((j++ % 2 == 0) ? new Vector2(ExplosivePower, 0) : new Vector2(0, ExplosivePower));
+#if DEBUG
+				Console.WriteLine($"Atomic Bpmb Colliding: {i}");
+#endif
 			}
 			Remove();
+
 		}
+
 	}
 	public void ReadParametrs()
 	{
@@ -63,7 +68,7 @@ public partial class AtomicBomb : RigidBody2D
 	}
 	public void Remove()
 	{
-		GetParent().RemoveChild(this);
+		this.Cancel();
 		Settings.AnyEntity.Remove(this);
 		ObjectsSpawn.RigidBodies.Remove(this);
 	}

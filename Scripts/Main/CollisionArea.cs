@@ -35,7 +35,7 @@ public partial class CollisionLine : Line2D
 public partial class CollisionArea : StaticBody2D
 {
 	private List<Vector2> _currentLinePoints = new List<Vector2>();
-	private List<CollisionLine> _collisionsLines = new List<CollisionLine>();
+	public static List<CollisionLine> CollisionsLines = new List<CollisionLine>();
 	private CollisionLine _currentLine;
 
 	private bool _mousePressed = false;
@@ -62,7 +62,7 @@ public partial class CollisionArea : StaticBody2D
 
 		if (Input.IsActionJustReleased("clearCollisionLines"))
 			ClearCollisionLines();
-		if (Input.IsActionJustReleased("deleteBody"))
+		if (Input.IsActionJustReleased("deleteBody") && MouseSelectedObject != null)
 		{
 			Settings.AnyEntity.Remove(MouseSelectedObject);
 			ObjectsSpawn.RigidBodies.Remove(MouseSelectedObject);
@@ -101,7 +101,6 @@ public partial class CollisionArea : StaticBody2D
 					_currentLine.collisionArea.GetChild<CollisionShape2D>(0).Shape = new SegmentShape2D() { A = _from, B = _to };
 				}
 			}
-
 			MouseCollisionArea.Position = mousePosition;
 		}
 		
@@ -113,7 +112,7 @@ public partial class CollisionArea : StaticBody2D
 		_currentLine = new CollisionLine(width: 3);
 		if (_drawStraightLine)
 			_currentLine.collisionArea.AddChild(new CollisionShape2D());
-		_collisionsLines.Add(_currentLine);
+		CollisionsLines.Add(_currentLine);
 		Settings.AnyEntity.Add(_currentLine);
 		AddChild(_currentLine);
 
@@ -125,21 +124,23 @@ public partial class CollisionArea : StaticBody2D
 		_mousePressed = false;
 		_currentLinePoints.Clear();
 	}
-	public void ClearCollisionLines()
+	public static void ClearCollisionLines()
 	{
 
 		Settings.AnyEntity.ForEach(node =>
 		{
 			if (node is CollisionLine) node.Cancel();
 		});
-		for (int i = _collisionsLines.Count - 1; i >= 0; i--)
-			Settings.AnyEntity.Remove(_collisionsLines[i]);
-		_collisionsLines.Clear();
+		for (int i = CollisionsLines.Count - 1; i >= 0; i--)
+			Settings.AnyEntity.Remove(CollisionsLines[i]);
+		CollisionsLines.Clear();
 		ObjectsSpawn.RigidBodies.ForEach(body => body.ApplyForce(new Vector2(0, 0)));
 	}
 	public void GetObjectsUnderMouse(Node2D body)
 	{
 		if (body is RigidBody2D rigidBody)
 			MouseSelectedObject = rigidBody;
+		else
+			MouseSelectedObject = null;
 	}
 }

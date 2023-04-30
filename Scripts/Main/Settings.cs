@@ -24,10 +24,17 @@ public partial class Settings : Node
 	};
 
 	public static bool userIsInteractGUI = false;
-    public static List<Node2D> AnyEntity = new List<Node2D>(); // This List is required for you could cancel the last action
+	public static bool RandomColors = false;
+	public static bool RandomTorque = false;
+	public static int MaxRandomTorque = 0;
+	public static bool RandomScale = false;
+	public static float MaxRandomScale = 1f;
+	public static float MinRandomScale = 0.2f;
 
-    // Call in mouse_entered signal for fix bug with bodies spawn
-    public void userInteractWithGUI()
+	public static List<Node2D> AnyEntity = new List<Node2D>(); // This List is required for you could cancel the last action
+
+	// Call in mouse_entered signal for fix bug with bodies spawn
+	public void userInteractWithGUI()
 	{
 		userIsInteractGUI = true;
 	}
@@ -44,14 +51,41 @@ public partial class Settings : Node
 	}
 	public static void CancelAction()
 	{
-        AnyEntity[^1].Cancel();
+		AnyEntity[^1].Cancel();
 		object entity = AnyEntity[^1];
 
 		if (entity is RigidBody2D)
 			ObjectsSpawn.RigidBodies.Remove(entity as RigidBody2D);
-		else if (entity is ParentGenerator)
-			ObjectsSpawn.Generators.Remove(entity as ParentGenerator);
+		else if (entity is Generator)
+			ObjectsSpawn.Generators.Remove(entity as Generator);
 
-        AnyEntity.RemoveAt(AnyEntity.Count - 1);
-    }
+		AnyEntity.RemoveAt(AnyEntity.Count - 1);
+	}
+	public void ApplyRandomColors(bool button_pressed) // Called from "toggled" signal in UI/Special Settings Panel/Special Settings VBox/Random Torque
+	{
+		RandomColors = button_pressed;
+		Console.WriteLine("Random Color:" + ((RandomColors) ? "On" : "Off"));
+	}
+	#region Random Torque
+	public void ApplyRandomTorque(bool button_pressed)
+	{
+		RandomTorque = button_pressed;
+		GetParent().GetNode<HSlider>("UI/Special Settings Panel/Special Settings VBox/Random Torque Slider").Visible = button_pressed;
+	}
+	public void SetMaxRandomTorque(double value)
+	{
+		MaxRandomTorque = Convert.ToInt32(value);
+	}
+	#endregion
+	#region RandomScale
+	public void ApplyRandomScale(bool button_pressed)
+	{
+		RandomScale = button_pressed;
+		GetParent().GetNode<HSlider>("UI/Special Settings Panel/Special Settings VBox/Random Scale Slider").Visible = button_pressed;
+	}
+	public void SetMaxRandomScale(double value)
+	{
+		MaxRandomScale = Convert.ToSingle(value);
+	}
+	#endregion
 }

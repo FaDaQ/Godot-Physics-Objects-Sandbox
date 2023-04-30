@@ -1,16 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="110px" height="110px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g><path style="opacity:0.994" fill="#101010" d="M 103.5,78.5 C 76.8906,78.4844 50.5573,78.4844 24.5,78.5C 50.8249,79.4998 77.1582,79.8331 103.5,79.5C 102.432,82.0752 100.765,84.2419 98.5,86C 68.8333,86.6667 39.1667,86.6667 9.5,86C 7.5,84 5.5,82 3.5,80C 18.9589,54.9167 34.2922,29.75 49.5,4.5C 53.8785,2.8114 57.7118,3.47807 61,6.5C 75.4552,30.4228 89.6218,54.4228 103.5,78.5 Z M 79.5,69.5 C 63.1667,70.8333 46.8333,70.8333 30.5,69.5C 38.1065,56.0539 45.9399,42.7205 54,29.5C 62.7603,42.6922 71.2603,56.0255 79.5,69.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 82.5,9.5 C 83.8333,10.1667 83.8333,10.1667 82.5,9.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 88.5,10.5 C 89.8333,11.1667 89.8333,11.1667 88.5,10.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 88.5,14.5 C 89.8333,15.1667 89.8333,15.1667 88.5,14.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 88.5,21.5 C 89.8333,22.1667 89.8333,22.1667 88.5,21.5 Z"/></g>
-<g><path style="opacity:0.006" fill="#fefffe" d="M 94.5,31.5 C 95.525,31.8966 95.6917,32.5632 95,33.5C 94.5357,32.9056 94.369,32.2389 94.5,31.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 94.5,35.5 C 93.8333,34.1667 93.8333,34.1667 94.5,35.5 Z"/></g>
-<g><path style="opacity:0.008" fill="#fefffe" d="M 94.5,35.5 C 95.525,35.8966 95.6917,36.5632 95,37.5C 94.5357,36.9056 94.369,36.2389 94.5,35.5 Z"/></g>
-<g><path style="opacity:0.009" fill="#fefffe" d="M 94.5,38.5 C 95.2891,38.7828 95.9558,39.2828 96.5,40C 95.184,40.5281 94.5173,40.0281 94.5,38.5 Z"/></g>
-<g><path style="opacity:0.004" fill="#fefffe" d="M 98.5,46.5 C 99.8333,47.1667 99.8333,47.1667 98.5,46.5 Z"/></g>
-<g><path style="opacity:0.32" fill="#fefffe" d="M 30.5,69.5 C 46.8333,70.8333 63.1667,70.8333 79.5,69.5C 83.3465,70.4342 87.0131,70.7675 90.5,70.5C 70.1667,71.8333 49.8333,71.8333 29.5,70.5C 29.6236,69.8933 29.9569,69.56 30.5,69.5 Z"/></g>
-<g><path style="opacity:0.043" fill="#fefffe" d="M 103.5,78.5 C 104.833,78.8333 104.833,79.1667 103.5,79.5C 77.1582,79.8331 50.8249,79.4998 24.5,78.5C 50.5573,78.4844 76.8906,78.4844 103.5,78.5 Z"/></g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 110 110" style="enable-background:new 0 0 110 110;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.994;fill-rule:evenodd;clip-rule:evenodd;fill:#282828;enable-background:new    ;}
+	.st1{opacity:4.000000e-03;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+	.st2{opacity:6.000000e-03;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+	.st3{opacity:8.000000e-03;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+	.st4{opacity:9.000000e-03;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+	.st5{opacity:0.32;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+	.st6{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#C7C7C7;stroke-miterlimit:10;}
+	.st7{opacity:4.300000e-02;fill-rule:evenodd;clip-rule:evenodd;fill:#FEFFFE;enable-background:new    ;}
+</style>
+<g>
+	<path class="st0" d="M103.5,78.5c-26.6,0-52.9,0-79,0c26.3,1,52.7,1.3,79,1c-1.1,2.6-2.7,4.7-5,6.5c-29.7,0.7-59.3,0.7-89,0
+		c-2-2-4-4-6-6C19,54.9,34.3,29.8,49.5,4.5c4.4-1.7,8.2-1,11.5,2C75.5,30.4,89.6,54.4,103.5,78.5z M79.5,69.5
+		c-16.3,1.3-32.7,1.3-49,0c7.6-13.4,15.4-26.8,23.5-40C62.8,42.7,71.3,56,79.5,69.5z"/>
+</g>
+<g>
+	<path class="st1" d="M82.5,9.5C83.8,10.2,83.8,10.2,82.5,9.5z"/>
+</g>
+<g>
+	<path class="st1" d="M88.5,10.5C89.8,11.2,89.8,11.2,88.5,10.5z"/>
+</g>
+<g>
+	<path class="st1" d="M88.5,14.5C89.8,15.2,89.8,15.2,88.5,14.5z"/>
+</g>
+<g>
+	<path class="st1" d="M88.5,21.5C89.8,22.2,89.8,22.2,88.5,21.5z"/>
+</g>
+<g>
+	<path class="st2" d="M94.5,31.5c1,0.4,1.2,1.1,0.5,2C94.5,32.9,94.4,32.2,94.5,31.5z"/>
+</g>
+<g>
+	<path class="st1" d="M94.5,35.5C93.8,34.2,93.8,34.2,94.5,35.5z"/>
+</g>
+<g>
+	<path class="st3" d="M94.5,35.5c1,0.4,1.2,1.1,0.5,2C94.5,36.9,94.4,36.2,94.5,35.5z"/>
+</g>
+<g>
+	<path class="st4" d="M94.5,38.5c0.8,0.3,1.5,0.8,2,1.5C95.2,40.5,94.5,40,94.5,38.5z"/>
+</g>
+<g>
+	<path class="st1" d="M98.5,46.5C99.8,47.2,99.8,47.2,98.5,46.5z"/>
+</g>
+<g>
+	<path class="st5" d="M30.5,69.5c16.3,1.3,32.7,1.3,49,0c3.8,0.9,7.5,1.3,11,1c-20.3,1.3-40.7,1.3-61,0C29.6,69.9,30,69.6,30.5,69.5
+		z"/>
+</g>
+<polygon class="st6" points="12.9,78.5 53.5,11.8 95.5,78.5 13.6,78.5 "/>
+<g>
+	<path class="st7" d="M103.5,78.5c1.3,0.3,1.3,0.7,0,1c-26.3,0.3-52.7,0-79-1C50.6,78.5,76.9,78.5,103.5,78.5z"/>
+</g>
 </svg>
