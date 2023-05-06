@@ -47,15 +47,15 @@ public partial class Settings : Node
 	public void GravityChanged(string new_text)
 	{
 		Gravity = Convert.ToSingle(new_text.Replace(".", ","));
-		ObjectsSpawn.RigidBodies.ForEach(body => body.GravityScale = Gravity);
+		ObjectsSpawn.Objects.ForEach(node => { if (node is RigidBody2D body) body.GravityScale = Gravity; });
 	}
 	public static void CancelAction()
 	{
 		AnyEntity[^1].Cancel();
-		object entity = AnyEntity[^1];
+		Node2D entity = AnyEntity[^1];
 
-		if (entity is RigidBody2D)
-			ObjectsSpawn.RigidBodies.Remove(entity as RigidBody2D);
+		if (entity is PhysicsBody2D || entity is CollisionObject2D)
+			ObjectsSpawn.Objects.Remove(entity);
 		else if (entity is Generator)
 			ObjectsSpawn.Generators.Remove(entity as Generator);
 

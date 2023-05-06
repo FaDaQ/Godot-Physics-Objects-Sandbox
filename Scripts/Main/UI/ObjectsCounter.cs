@@ -3,7 +3,7 @@ using System;
 
 public partial class ObjectsCounter : Label
 {
-	private int _currentCount = ObjectsSpawn.RigidBodies.Count;
+	private int _currentCount = ObjectsSpawn.Objects.Count;
 	public override void _Ready()
 	{
 		Text = "Objects: 0";
@@ -11,10 +11,10 @@ public partial class ObjectsCounter : Label
 
 	public override void _Process(double delta)
 	{
-		if (_currentCount != ObjectsSpawn.RigidBodies.Count)
+		if (_currentCount != ObjectsSpawn.Objects.Count)
 		{
-			Text = $"Objects: {ObjectsSpawn.RigidBodies.Count}";
-			_currentCount = ObjectsSpawn.RigidBodies.Count;
+			Text = $"Objects: {ObjectsSpawn.Objects.Count}";
+			_currentCount = ObjectsSpawn.Objects.Count;
 		}
 
 

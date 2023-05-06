@@ -5,7 +5,7 @@ using System.Linq;
 
 public partial class ObjectsSpawn : Node2D
 {
-	public static List<RigidBody2D> RigidBodies = new List<RigidBody2D>();
+	public static List<Node2D> Objects = new List<Node2D>();
 	public static List<Generator> Generators = new List<Generator>();
 
 	public static PackedScene bodyScene;
@@ -74,7 +74,7 @@ public partial class ObjectsSpawn : Node2D
 				body.GetChild<Node2D>(1).Scale = new Vector2(scaleValue, scaleValue);
 			}
 
-			RigidBodies.Add(body);
+			Objects.Add(body);
 			Settings.AnyEntity.Add(body);
 			AddChild(body);
 		}
@@ -89,15 +89,12 @@ public partial class ObjectsSpawn : Node2D
 		}
 		else if (Settings.currentObjectName.Contains("Interaction: "))
 		{
-			if (bodySceneName == "Atomic Bomb")
-			{
-				PackedScene bombScene = (PackedScene)ResourceLoader.Load($"res://Scenes/InteractionObjects/{bodySceneName}.tscn");
-				RigidBody2D body = (RigidBody2D)bombScene.Instantiate();
-				body.Position = GetViewport().GetMousePosition();
-
-				RigidBodies.Add(body);
-				AddChild(body);
-			}
+            PackedScene interactionScene = (PackedScene)ResourceLoader.Load($"res://Scenes/InteractionObjects/{bodySceneName}.tscn");
+			Node2D interactionObject = null;
+            interactionObject = (Node2D)interactionScene.Instantiate();
+            interactionObject.Position = GetViewport().GetMousePosition();
+			Objects.Add(interactionObject);
+			AddChild(interactionObject);
 		}
 	}
 	public void ClearListAndDeleteChilds<T>(List<T> list)
@@ -108,10 +105,10 @@ public partial class ObjectsSpawn : Node2D
 
 	public void ClearBodies()
 	{
-		Settings.AnyEntity.ForEach(node => { if (node is RigidBody2D) node.Cancel(); });
-		for (int i = RigidBodies.Count - 1; i >= 0; i--)
-			Settings.AnyEntity.Remove(RigidBodies[i]);
-		RigidBodies.Clear();
+		Settings.AnyEntity.ForEach(node => { if (node is PhysicsBody2D || node is CollisionObject2D) node.Cancel(); });
+		for (int i = Objects.Count - 1; i >= 0; i--)
+			Settings.AnyEntity.Remove(Objects[i]);
+		Objects.Clear();
 	}
 	public void ClearGenerators()
 	{
@@ -128,5 +125,9 @@ public partial class ObjectsSpawn : Node2D
 		ClearBodies();
 		ClearGenerators();
 		CollisionArea.ClearCollisionLines();
+		Settings.AnyEntity.ForEach(node => node.Cancel());
+		Settings.AnyEntity.Clear();
+		foreach (Node2D i in GetChildren())
+			i.Cancel();
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cmj11ug4c064m"]
+[gd_scene load_steps=31 format=3 uid="uid://cmj11ug4c064m"]
 
 [ext_resource type="Script" path="res://Scripts/Main/Root.cs" id="1_50ubk"]
 [ext_resource type="Script" path="res://Scripts/Main/Drawer.cs" id="2_vydgd"]
@@ -8,13 +8,21 @@
 [ext_resource type="Script" path="res://Scripts/Main/ObjectsSpawn.cs" id="5_n56qq"]
 [ext_resource type="Script" path="res://Scripts/Main/CollisionArea.cs" id="6_jnarl"]
 [ext_resource type="Script" path="res://Scripts/Main/Settings.cs" id="7_14ds1"]
+[ext_resource type="Texture2D" uid="uid://6ct2m10q8n5g" path="res://Sprites/Icons/Circle Icon.svg" id="8_byiiv"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/SelectRigidBody.cs" id="8_fhri7"]
+[ext_resource type="Texture2D" uid="uid://chr41qbn0xrmj" path="res://Sprites/Icons/Hexagon Icon.svg" id="9_aoi0n"]
+[ext_resource type="Texture2D" uid="uid://dpkpeougb8p1t" path="res://Sprites/Icons/Rectangle Icon.svg" id="9_kn8ws"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/BodySettingsWindow.cs" id="10_82ybi"]
+[ext_resource type="Texture2D" uid="uid://dueapjtfiac24" path="res://Sprites/Icons/Triangle Icon.svg" id="11_06fdf"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/ParametrsChange_ConnectingSignals.cs" id="11_lihge"]
+[ext_resource type="Texture2D" uid="uid://bf8bvk1e3p6uv" path="res://Sprites/Icons/Star Icon.svg" id="12_2j78p"]
 [ext_resource type="Script" path="res://Scripts/Main/Borders Scripts/BorderSettingsVBox_ConnectingSignals.cs" id="12_15qde"]
+[ext_resource type="Texture2D" uid="uid://bwjtu8ov1b4mq" path="res://Sprites/Icons/Bodies Generator Icon.svg" id="13_08315"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/PausedLabel.cs" id="13_d5me0"]
+[ext_resource type="Texture2D" uid="uid://dntjaabngd63c" path="res://Sprites/Icons/Atomic Bomb Icon.svg" id="14_4tia4"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/ControlsPanel.cs" id="14_5mu47"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/RandomTorqueLabel.cs" id="14_628d7"]
+[ext_resource type="Texture2D" uid="uid://c0rctaslg5q7r" path="res://Sprites/Icons/Reflector Icon.svg" id="15_3sj8x"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/RandomScaleLabel.cs" id="15_ns4is"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsPanel.cs" id="16_kserg"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsVBox.cs" id="17_c6jl8"]
@@ -34,7 +42,7 @@ radius = 4.12311
 script = ExtResource("1_50ubk")
 
 [node name="Panel Container" type="PanelContainer" parent="."]
-self_modulate = Color(0, 0.419608, 0.4, 1)
+self_modulate = Color(0, 0.0901961, 0.4, 1)
 offset_right = 1280.0
 offset_bottom = 718.0
 
@@ -60,10 +68,12 @@ offset_bottom = 84.0
 text = "Objects: "
 script = ExtResource("4_a1f3k")
 
-[node name="Objects" type="Node2D" parent="Panel Container/Drawer"]
+[node name="Objects Area" type="Node2D" parent="Panel Container/Drawer"]
+process_mode = 3
 script = ExtResource("5_n56qq")
 
 [node name="Collision Area" type="StaticBody2D" parent="Panel Container/Drawer"]
+process_mode = 3
 script = ExtResource("6_jnarl")
 
 [node name="Floor" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area"]
@@ -108,28 +118,38 @@ offset_bottom = 40.0
 
 [node name="Select Rigid Body" type="OptionButton" parent="UI/Top MenuBar/Top Menu HBox"]
 layout_mode = 2
-item_count = 9
+item_count = 10
 selected = 0
 popup/item_0/text = "Body: Circle"
+popup/item_0/icon = ExtResource("8_byiiv")
 popup/item_0/id = 0
 popup/item_1/text = "Body: Rectangle"
+popup/item_1/icon = ExtResource("9_kn8ws")
 popup/item_1/id = 1
 popup/item_2/text = "Body: Hexagon"
+popup/item_2/icon = ExtResource("9_aoi0n")
 popup/item_2/id = 2
 popup/item_3/text = "Body: Triangle"
+popup/item_3/icon = ExtResource("11_06fdf")
 popup/item_3/id = 3
 popup/item_4/text = "Body: Star"
+popup/item_4/icon = ExtResource("12_2j78p")
 popup/item_4/id = 5
 popup/item_5/text = ""
 popup/item_5/id = 5
 popup/item_5/separator = true
 popup/item_6/text = "Generator: Body"
+popup/item_6/icon = ExtResource("13_08315")
 popup/item_6/id = 6
 popup/item_7/text = ""
 popup/item_7/id = 7
 popup/item_7/separator = true
 popup/item_8/text = "Interaction: Atomic Bomb"
+popup/item_8/icon = ExtResource("14_4tia4")
 popup/item_8/id = 8
+popup/item_9/text = "Interaction: Reflector"
+popup/item_9/icon = ExtResource("15_3sj8x")
+popup/item_9/id = 9
 script = ExtResource("8_fhri7")
 
 [node name="Gravity" type="LineEdit" parent="UI/Top MenuBar/Top Menu HBox"]
@@ -389,7 +409,7 @@ text = "[Shift + LBM] - Spam Bodies"
 layout_mode = 2
 text = "[Mouse Wheel Click] - Clean Bodies"
 
-[node name="Label" type="Label" parent="UI/Controls Panel/VBox 0"]
+[node name="Delete Object Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
 text = "[RMB] - Delete Object"
 
@@ -422,9 +442,14 @@ text = "[Alt + G] - Clear Generators"
 layout_mode = 2
 text = "---------------------------------------------------------"
 
-[node name="Label2" type="Label" parent="UI/Controls Panel/VBox 0"]
+[node name="Canceling Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
 text = "[Ctrl + Z] - Cancel last spawn object or line"
+
+[node name="Applying Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
+layout_mode = 2
+text = "[Ctrl + Enter] - Apply action. 
+For example: push Reflector."
 
 [node name="Seperator 4" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
@@ -503,13 +528,13 @@ text = "✖"
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="UI/RigidBody Settings Panel" method="ShowWindow"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Panel Container/Drawer/Objects" method="ClearBodies"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Panel Container/Drawer/Objects Area" method="ClearBodies"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Panel Container/Drawer/Objects" method="ClearGenerators"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Panel Container/Drawer/Objects Area" method="ClearGenerators"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Panel Container/Drawer/Collision Area" method="ClearCollisionLines"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Panel Container/Drawer/Collision Area" method="ClickClearCollisionLines"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="Settings" method="userInteractWithGUI"]
@@ -517,7 +542,7 @@ text = "✖"
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="UI/Special Settings Panel" method="HidePanel"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Panel Container/Drawer/Objects" method="ClearAllObjects"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Panel Container/Drawer/Objects Area" method="ClearAllObjects"]
 [connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userInteractWithGUI"]
 [connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="UI/Controls Panel" method="ShowWindow"]

@@ -40,7 +40,7 @@ public partial class Root : Node2D
 		GetNode<Control>("Panel Container").Size = windowSize;
 		UI.Size = windowSize;
 		ResizeableBorders(windowSize);
-		ObjectsSpawn.RigidBodies.ForEach(body => body.ApplyForce(new Vector2(0, 0)));
+		ObjectsSpawn.Objects.ForEach(node => { if (node is RigidBody2D body) body.ApplyForce(new Vector2(0, 0)); });
 		Console.WriteLine(windowSize);
 	}
 

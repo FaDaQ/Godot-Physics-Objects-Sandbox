@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://diqodo2c24xo1"]
+[gd_scene load_steps=5 format=3 uid="uid://diqodo2c24xo1"]
 
 [ext_resource type="PackedScene" uid="uid://ckcw40ix64dc6" path="res://Scenes/Generators/Parent Generator.tscn" id="1_61btc"]
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/BodiesGenerator.cs" id="1_euen6"]
 [ext_resource type="Script" path="res://Scripts/Generators/Bodies Generator/SelectGeneratorBody.cs" id="3_040rv"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwgkp"]
+lifetime_randomness = 0.13
+emission_shape = 1
+emission_sphere_radius = 4.33
+particle_flag_disable_z = true
+spread = 47.34
+gravity = Vector3(0, 2, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = 9.09
+radial_accel_max = 48.05
+scale_max = 2.0
+color = Color(0.917647, 0.6, 0.6, 1)
 
 [node name="Bodies Generator" instance=ExtResource("1_61btc")]
 script = ExtResource("1_euen6")
@@ -88,3 +102,7 @@ popup/item_3/id = 3
 popup/item_4/text = "Star"
 popup/item_4/id = 4
 script = ExtResource("3_040rv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2"]
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_hwgkp")

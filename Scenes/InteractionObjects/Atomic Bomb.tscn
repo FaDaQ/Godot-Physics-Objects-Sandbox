@@ -11,20 +11,16 @@
 radius = 29.0
 height = 102.0
 
-[node name="Atomic Bomb" type="RigidBody2D"]
-mass = 1000.0
-max_contacts_reported = 100
-contact_monitor = true
-freeze = true
+[node name="Atomic Bomb" type="Area2D"]
+process_mode = 1
 script = ExtResource("1_h3ynq")
+metadata/setupIsOver = false
 
 [node name="AtomicBomb" type="Sprite2D" parent="."]
 texture = ExtResource("1_w3v3o")
 
-[node name="Bomb Hitbox Area" type="Area2D" parent="."]
+[node name="Bomb Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
-
-[node name="Bomb Hitbox" type="CollisionShape2D" parent="Bomb Hitbox Area"]
 shape = SubResource("CapsuleShape2D_dnc16")
 
 [node name="Atomic Bomb Settings Panel" type="PanelContainer" parent="."]
@@ -65,22 +61,30 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "1"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="Explosive Power Edit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "1000"
+text = "300"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="Explosive Radius Edit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "10"
+text = "15"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="LineEdit" type="LineEdit" parent="Atomic Bomb Settings Panel/Parametrs Change"]
 visible = false
 layout_mode = 2
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="Apply" type="Button" parent="Atomic Bomb Settings Panel"]
 process_mode = 3

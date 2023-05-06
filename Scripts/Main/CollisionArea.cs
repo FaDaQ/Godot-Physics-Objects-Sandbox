@@ -28,7 +28,6 @@ public partial class CollisionLine : Line2D
 		GetParent().RemoveChild(this);
 	}
 
-
 	public StaticBody2D collisionArea = new StaticBody2D();
 }
 
@@ -65,7 +64,7 @@ public partial class CollisionArea : StaticBody2D
 		if (Input.IsActionJustReleased("deleteBody") && MouseSelectedObject != null)
 		{
 			Settings.AnyEntity.Remove(MouseSelectedObject);
-			ObjectsSpawn.RigidBodies.Remove(MouseSelectedObject);
+			ObjectsSpawn.Objects.Remove(MouseSelectedObject);
 			MouseSelectedObject.Cancel();
 		}
 
@@ -134,7 +133,11 @@ public partial class CollisionArea : StaticBody2D
 		for (int i = CollisionsLines.Count - 1; i >= 0; i--)
 			Settings.AnyEntity.Remove(CollisionsLines[i]);
 		CollisionsLines.Clear();
-		ObjectsSpawn.RigidBodies.ForEach(body => body.ApplyForce(new Vector2(0, 0)));
+		ObjectsSpawn.Objects.ForEach(body => ((RigidBody2D)body).ApplyForce(new Vector2(0, 0)));
+	}
+	public void ClickClearCollisionLines()
+	{
+		ClearCollisionLines();
 	}
 	public void GetObjectsUnderMouse(Node2D body)
 	{
@@ -143,4 +146,5 @@ public partial class CollisionArea : StaticBody2D
 		else
 			MouseSelectedObject = null;
 	}
+
 }

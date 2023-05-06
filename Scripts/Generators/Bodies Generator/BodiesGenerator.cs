@@ -53,7 +53,7 @@ public partial class BodiesGenerator : Generator
 		if (Settings.RandomColors)
 			body.GetChild<Sprite2D>(0).SelfModulate = new Color(rnd.NextSingle(), rnd.NextSingle(), rnd.NextSingle());
 
-		ObjectsSpawn.RigidBodies.Add(body);
+		ObjectsSpawn.Objects.Add(body);
 		Settings.AnyEntity.Add(body);
 
 		_parent.AddChild(body);

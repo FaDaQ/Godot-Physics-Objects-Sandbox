@@ -30,9 +30,11 @@ public static class Extension
     // Remove node from this Parent
     public static void Cancel(this Node2D node)
     {
-        node.GetParent().RemoveChild(node);
 #if DEBUG
-        Console.WriteLine($"Removing: [{node}] [{node.Name}]");
+        Console.WriteLine($"Removing: [{node}] [{node.Name}] [Parent: [{node.GetParent()}] [{node.GetParent().Name}]]");
 #endif
+        if (node is Reflector reflector)
+            reflector.TrajectoryLine.GetParent().RemoveChild(reflector.TrajectoryLine);
+        node.GetParent().RemoveChild(node);
     }
 }

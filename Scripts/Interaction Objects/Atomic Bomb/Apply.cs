@@ -9,7 +9,7 @@ public partial class Apply : Button
 		Connect("pressed", Callable.From(() => 
 		{
 			GetParent<PanelContainer>().Hide();
-			GetParent().GetParent<RigidBody2D>().Freeze = false;
+            GetParent().GetParent().SetMeta("setupIsOver", true); 
 		}));
 	}
 

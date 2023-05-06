@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf75gc8av5o03"]
+
+[ext_resource type="Script" path="res://Scripts/Interaction Objects/Reflector/Reflector.cs" id="1_2eht6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1tk1"]
+emission_shape = 2
+emission_sphere_radius = 6.83
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_max = 42.86
+sub_emitter_mode = 1
+sub_emitter_frequency = 0.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wumiy"]
+radius = 7.0
+
+[node name="Reflector" type="CharacterBody2D"]
+process_mode = 1
+motion_mode = 1
+script = ExtResource("1_2eht6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_mode = 3
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_n1tk1")
+trail_lifetime = 0.01
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wumiy")
