@@ -1,8 +1,7 @@
 using Godot;
-using Godot.Collections;
 using System;
 
-public partial class AtomicBombSettingsPanel : PanelContainer
+public partial class UIParentControl : Control
 {
 	public override void _Ready()
 	{

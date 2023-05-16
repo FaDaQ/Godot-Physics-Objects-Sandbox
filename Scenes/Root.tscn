@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmj11ug4c064m"]
+[gd_scene load_steps=33 format=3 uid="uid://cmj11ug4c064m"]
 
 [ext_resource type="Script" path="res://Scripts/Main/Root.cs" id="1_50ubk"]
 [ext_resource type="Script" path="res://Scripts/Main/Drawer.cs" id="2_vydgd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Main/Settings.cs" id="7_14ds1"]
 [ext_resource type="Texture2D" uid="uid://6ct2m10q8n5g" path="res://Sprites/Icons/Circle Icon.svg" id="8_byiiv"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/SelectRigidBody.cs" id="8_fhri7"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/UIParentControl.cs" id="8_muqfm"]
 [ext_resource type="Texture2D" uid="uid://chr41qbn0xrmj" path="res://Sprites/Icons/Hexagon Icon.svg" id="9_aoi0n"]
 [ext_resource type="Texture2D" uid="uid://dpkpeougb8p1t" path="res://Sprites/Icons/Rectangle Icon.svg" id="9_kn8ws"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/BodySettingsWindow.cs" id="10_82ybi"]
@@ -25,7 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://c0rctaslg5q7r" path="res://Sprites/Icons/Reflector Icon.svg" id="15_3sj8x"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/RandomScaleLabel.cs" id="15_ns4is"]
 [ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsPanel.cs" id="16_kserg"]
-[ext_resource type="Script" path="res://Scripts/Main/UI/Special Settings/SpecialSettingsVBox.cs" id="17_c6jl8"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/OtherOptions.cs" id="22_jh0ke"]
+[ext_resource type="Script" path="res://Scripts/Main/UI/ActionsPanel.cs" id="27_2yj3c"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x7eqj"]
 
@@ -95,6 +97,9 @@ position = Vector2(100, 300)
 [node name="Mouse Collision" type="CollisionShape2D" parent="Panel Container/Drawer/Collision Area/Mouse Position Area"]
 shape = SubResource("CircleShape2D_7rvy5")
 
+[node name="Timer" type="Timer" parent="Panel Container/Drawer/Collision Area"]
+wait_time = 4.146
+
 [node name="Settings" type="Node2D" parent="."]
 script = ExtResource("7_14ds1")
 
@@ -105,6 +110,7 @@ anchors_preset = 0
 offset_right = 1282.0
 offset_bottom = 719.0
 mouse_filter = 2
+script = ExtResource("8_muqfm")
 
 [node name="Top MenuBar" type="MenuBar" parent="UI"]
 layout_mode = 0
@@ -161,6 +167,10 @@ alignment = 1
 layout_mode = 2
 text = "Body Settings"
 
+[node name="Actions" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
+layout_mode = 2
+text = "Settings and Actions"
+
 [node name="Clear Bodies" type="Button" parent="UI/Top MenuBar/Top Menu HBox"]
 layout_mode = 2
 text = "Clean Bodies"
@@ -192,10 +202,14 @@ text = "Guide"
 
 [node name="Down MenuBar" type="MenuBar" parent="UI"]
 visible = false
-layout_mode = 0
-offset_top = 682.0
-offset_right = 1280.0
-offset_bottom = 722.0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -37.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Down MenuBar"]
 layout_mode = 0
@@ -353,6 +367,7 @@ offset_left = -190.0
 offset_bottom = 720.0
 grow_horizontal = 0
 mouse_filter = 2
+script = ExtResource("22_jh0ke")
 
 [node name="Paused" type="Label" parent="UI/Other Options"]
 visible = false
@@ -411,7 +426,7 @@ text = "[Mouse Wheel Click] - Clean Bodies"
 
 [node name="Delete Object Guide" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
-text = "[RMB] - Delete Object"
+text = "[Alt + RMB] - Delete Object"
 
 [node name="Seperator 1" type="Label" parent="UI/Controls Panel/VBox 0"]
 layout_mode = 2
@@ -459,7 +474,7 @@ text = "---------------------------------------------------------"
 layout_mode = 2
 text = "F11 - Set Fulcreen Mode"
 
-[node name="Button" type="Button" parent="UI/Controls Panel"]
+[node name="Close" type="Button" parent="UI/Controls Panel"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -479,7 +494,6 @@ script = ExtResource("16_kserg")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("17_c6jl8")
 
 [node name="Random Colors" type="CheckBox" parent="UI/Special Settings Panel/Special Settings VBox"]
 layout_mode = 2
@@ -516,51 +530,79 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "✖"
 
+[node name="Actions Panel" type="PanelContainer" parent="UI"]
+visible = false
+self_modulate = Color(0.0156863, 0.0941176, 0.0666667, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -200.5
+offset_right = 129.0
+offset_bottom = 200.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("27_2yj3c")
+
+[node name="HBox" type="HBoxContainer" parent="UI/Actions Panel"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Actions Names" type="VBoxContainer" parent="UI/Actions Panel/HBox"]
+layout_mode = 2
+
+[node name="Body Color" type="Label" parent="UI/Actions Panel/HBox/Actions Names"]
+layout_mode = 2
+text = "Body Color"
+
+[node name="Actions" type="VBoxContainer" parent="UI/Actions Panel/HBox"]
+layout_mode = 2
+
+[node name="Body Color" type="OptionButton" parent="UI/Actions Panel/HBox/Actions"]
+layout_mode = 2
+item_count = 7
+selected = 5
+popup/item_0/text = "Red"
+popup/item_0/id = 0
+popup/item_1/text = "Orange"
+popup/item_1/id = 1
+popup/item_2/text = "Blue"
+popup/item_2/id = 2
+popup/item_3/text = "Yellow"
+popup/item_3/id = 3
+popup/item_4/text = "Green"
+popup/item_4/id = 4
+popup/item_5/text = "Deffault"
+popup/item_5/id = 5
+popup/item_6/text = "Black"
+popup/item_6/id = 6
+
+[node name="Close" type="Button" parent="UI/Actions Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "✖"
+
 [connection signal="body_entered" from="Panel Container/Drawer/Collision Area/Mouse Position Area" to="Panel Container/Drawer/Collision Area" method="GetObjectsUnderMouse"]
 [connection signal="item_selected" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" method="SetCurrentBodyID"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Select Rigid Body" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="text_changed" from="UI/Top MenuBar/Top Menu HBox/Gravity" to="Settings" method="GravityChanged"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Body Settings" to="UI/RigidBody Settings Panel" method="ShowWindow"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Settings" method="userEndInteractWithGUI"]
+[connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Actions" to="UI/Actions Panel" method="ShowWindow"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Bodies" to="Panel Container/Drawer/Objects Area" method="ClearBodies"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Generators" to="Panel Container/Drawer/Objects Area" method="ClearGenerators"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear Lines" to="Panel Container/Drawer/Collision Area" method="ClickClearCollisionLines"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Borders Setting" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Special Settings" to="UI/Special Settings Panel" method="HidePanel"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Clear All" to="Panel Container/Drawer/Objects Area" method="ClearAllObjects"]
-[connection signal="mouse_entered" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="pressed" from="UI/Top MenuBar/Top Menu HBox/Controls Guide" to="UI/Controls Panel" method="ShowWindow"]
-[connection signal="mouse_entered" from="UI/RigidBody Settings Panel" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/RigidBody Settings Panel" to="Settings" method="userEndInteractWithGUI"]
 [connection signal="hidden" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/RigidBody Settings Panel/Close" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/RigidBody Settings Panel/Close" to="UI/RigidBody Settings Panel" method="ShowWindow"]
-[connection signal="mouse_entered" from="UI/Border Settings Panel" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Border Settings Panel" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Controls Panel" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Controls Panel" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="mouse_entered" from="UI/Controls Panel/Button" to="Settings" method="userInteractWithGUI"]
-[connection signal="mouse_exited" from="UI/Controls Panel/Button" to="Settings" method="userEndInteractWithGUI"]
-[connection signal="pressed" from="UI/Controls Panel/Button" to="UI/Controls Panel" method="ShowWindow"]
+[connection signal="pressed" from="UI/Controls Panel/Close" to="UI/Controls Panel" method="ShowWindow"]
 [connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Colors" to="Settings" method="ApplyRandomColors"]
 [connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Torque" to="Settings" method="ApplyRandomTorque"]
 [connection signal="value_changed" from="UI/Special Settings Panel/Special Settings VBox/Random Torque Slider" to="Settings" method="SetMaxRandomTorque"]
 [connection signal="toggled" from="UI/Special Settings Panel/Special Settings VBox/Random Scale" to="Settings" method="ApplyRandomScale"]
 [connection signal="value_changed" from="UI/Special Settings Panel/Special Settings VBox/Random Scale Slider" to="Settings" method="SetMaxRandomScale"]
+[connection signal="item_selected" from="UI/Actions Panel/HBox/Actions/Body Color" to="Settings" method="ApplyColor"]

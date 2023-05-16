@@ -65,6 +65,8 @@ public partial class ObjectsSpawn : Node2D
 
 			if (Settings.RandomColors)
 				body.GetChild<Sprite2D>(0).SelfModulate = new Color(rnd.NextSingle(), rnd.NextSingle(), rnd.NextSingle());
+			else
+				body.GetChild<Sprite2D>(0).SelfModulate = Settings.BodyColor;
 			if (Settings.RandomTorque)
 				body.ConstantTorque = rnd.Next(-Settings.MaxRandomTorque, Settings.MaxRandomTorque) * 100 * body.Mass;
 			if (Settings.RandomScale)
@@ -89,10 +91,10 @@ public partial class ObjectsSpawn : Node2D
 		}
 		else if (Settings.currentObjectName.Contains("Interaction: "))
 		{
-            PackedScene interactionScene = (PackedScene)ResourceLoader.Load($"res://Scenes/InteractionObjects/{bodySceneName}.tscn");
+			PackedScene interactionScene = (PackedScene)ResourceLoader.Load($"res://Scenes/InteractionObjects/{bodySceneName}.tscn");
 			Node2D interactionObject = null;
-            interactionObject = (Node2D)interactionScene.Instantiate();
-            interactionObject.Position = GetViewport().GetMousePosition();
+			interactionObject = (Node2D)interactionScene.Instantiate();
+			interactionObject.Position = GetViewport().GetMousePosition();
 			Objects.Add(interactionObject);
 			AddChild(interactionObject);
 		}

@@ -16,7 +16,8 @@ public partial class Root : Node2D
 		UI = GetNode<Control>("UI");
 
 		GetParent<Window>().Connect("size_changed", Callable.From(() => ChangeScreenSize()));
-		GetParent<Window>().MinSize = new Vector2I(1075, 445);
+		GetParent<Window>().MinSize = new Vector2I(1236, 490);
+
 	}
 
 	public override void _Process(double delta)
@@ -42,6 +43,7 @@ public partial class Root : Node2D
 		ResizeableBorders(windowSize);
 		ObjectsSpawn.Objects.ForEach(node => { if (node is RigidBody2D body) body.ApplyForce(new Vector2(0, 0)); });
 		Console.WriteLine(windowSize);
+		Settings.WindowSize = windowSize;
 	}
 
 	private void ResizeableBorders(Vector2 windowSize)

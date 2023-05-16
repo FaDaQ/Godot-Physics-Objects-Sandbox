@@ -61,14 +61,18 @@ public partial class CollisionArea : StaticBody2D
 
 		if (Input.IsActionJustReleased("clearCollisionLines"))
 			ClearCollisionLines();
-		if (Input.IsActionJustReleased("deleteBody") && MouseSelectedObject != null)
+		if (Input.IsActionJustPressed("deleteBody") && MouseSelectedObject != null)
 		{
 			Settings.AnyEntity.Remove(MouseSelectedObject);
 			ObjectsSpawn.Objects.Remove(MouseSelectedObject);
 			MouseSelectedObject.Cancel();
 		}
-
-		_drawStraightLine = Input.IsActionPressed("drawStraightCollisionLine");
+		else if (Input.IsActionPressed("moveBody"))
+		{
+			MouseSelectedObject.Freeze = true;
+			MouseSelectedObject.Position = GetViewport().GetMousePosition();
+        }
+        _drawStraightLine = Input.IsActionPressed("drawStraightCollisionLine");
 
 		if (@event is InputEventMouseMotion)
 		{

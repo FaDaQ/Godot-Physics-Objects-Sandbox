@@ -31,7 +31,22 @@ public partial class Settings : Node
 	public static float MaxRandomScale = 1f;
 	public static float MinRandomScale = 0.2f;
 
+	public static readonly Godot.Collections.Dictionary<string, Color> Colors = new Godot.Collections.Dictionary<string, Color>()
+	{
+		{ "Red", new Color(1, 0, 0) },
+		{ "Blue", new Color(0, 0, 1) },
+		{ "Deffault", new Color(1, 1, 1) },
+		{ "Black", new Color(0, 0, 0) },
+		{ "Green", new Color(0, 1, 0) },
+		{ "Orange", new Color(1, 0.52f, 0) },
+		{ "Yellow", new Color(1, 1, 0) }
+	};
+	public static string BodyColorName;
+	public static Color BodyColor = Colors["Deffault"];
+	
+
 	public static List<Node2D> AnyEntity = new List<Node2D>(); // This List is required for you could cancel the last action
+	public static Vector2 WindowSize;
 
 	// Call in mouse_entered signal for fix bug with bodies spawn
 	public void userInteractWithGUI()
@@ -61,11 +76,19 @@ public partial class Settings : Node
 
 		AnyEntity.RemoveAt(AnyEntity.Count - 1);
 	}
+	#region Colors
 	public void ApplyRandomColors(bool button_pressed) // Called from "toggled" signal in UI/Special Settings Panel/Special Settings VBox/Random Torque
 	{
 		RandomColors = button_pressed;
 		Console.WriteLine("Random Color:" + ((RandomColors) ? "On" : "Off"));
 	}
+	public void ApplyColor(long index) // Connecting in Actions Panel to Body Color OptionButton
+	{
+		BodyColorName = GetParent().GetNode<OptionButton>("UI/Actions Panel/HBox/Actions/Body Color").GetItemText((int)index);
+		BodyColor = Colors[BodyColorName];
+
+	}
+	#endregion
 	#region Random Torque
 	public void ApplyRandomTorque(bool button_pressed)
 	{

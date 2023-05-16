@@ -20,6 +20,8 @@ public partial class Reflector : CharacterBody2D
 		TrajectoryLine.Width = 1;
 		GetParent().AddChild(TrajectoryLine);
 		_startMousePosition = GetViewport().GetMousePosition();
+		TrajectoryLine.DefaultColor = Settings.BodyColor;
+		GetChild<GpuParticles2D>(0).SelfModulate = Settings.BodyColor;
 		if (Settings.RandomColors)
 		{
 			Random rnd = new Random();
@@ -27,7 +29,7 @@ public partial class Reflector : CharacterBody2D
 			TrajectoryLine.DefaultColor = randomColor;
 			GetChild<GpuParticles2D>(0).SelfModulate = randomColor;
 		}
-
+		
 	}
 
 	public override void _Process(double delta)

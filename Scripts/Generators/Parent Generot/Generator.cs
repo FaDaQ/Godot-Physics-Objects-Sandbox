@@ -14,24 +14,10 @@ public partial class Generator : Node2D
 
 	public override void _Ready()
 	{
-		GetChild(0).Connect("hidden", Callable.From(() => Settings.userIsInteractGUI = false));
+		GetChild<Control>(0).ConnectingUISignals();
 		_generatorPosition = GetViewport().GetMousePosition();
 		_parent = GetParent<Node2D>();
 		_timer = GetChild<Timer>(1);
-		Settings crutch = new Settings();
-		foreach (var i in GetChildren())
-		{
-			if (!(i is Timer))
-			{
-				i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
-				i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
-			}
-		}
-		foreach (var i in GetChild(0).GetChildren())
-		{
-			i.Connect("mouse_entered", Callable.From(() => crutch.userInteractWithGUI()));
-			i.Connect("mouse_exited", Callable.From(() => crutch.userEndInteractWithGUI()));
-		}
 		Settings.AnyEntity.Add(this);
 	}
 	public override void _Process(double delta)

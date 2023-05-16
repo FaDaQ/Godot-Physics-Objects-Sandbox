@@ -1,17 +1,19 @@
 using Godot;
 using System;
 
-public partial class Close : Button
+public partial class CircleJoints : RigidBody2D
 {
+	[Export]
+	private NodePath _body1Path;
+
+	[Export]
+	private NodePath _body2Path;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Connect("pressed", Callable.From(() =>
-		{
-			Settings.AnyEntity.Remove(GetParent().GetParent<AtomicBomb>());
-			GetParent().GetParent<AtomicBomb>().Remove();
-			Settings.userIsInteractGUI = false;
-		}));
+		var joint = new PinJoint2D();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
